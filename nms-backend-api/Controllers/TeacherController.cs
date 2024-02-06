@@ -1,6 +1,7 @@
-﻿
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using nms_backend_api.DTO;
 using nms_backend_api.Entity;
 using nms_backend_api.Logics.Concrete;
 using nms_backend_api.Logics.Contract;
@@ -11,19 +12,23 @@ namespace nms_backend_api.Controllers
     [ApiController]
     public class TeacherController : ControllerBase
     {
-
+        private readonly IMapper _mapper;
         public readonly ITeacherRepository teacherRepository;
 
-        public TeacherController(ITeacherRepository teacherRepository)
+        public TeacherController(ITeacherRepository teacherRepository, IMapper mapper)
         {
             this.teacherRepository = teacherRepository;
+            _mapper = mapper;
         }
         [HttpGet]
         public IActionResult GetAll()
         {
             try
             {
-                return Ok(teacherRepository.GetAll());
+               List<Teacher> teachers= teacherRepository.GetAll();
+                List<TeacherDTO> teacherDTOs = _mapper.Map<List<TeacherDTO>>(teachers);
+                return Ok(teacherDTOs);
+                // return Ok(teacherRepository.GetAll());
             }
             catch (Exception)
             {
@@ -109,7 +114,10 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-                return Ok(teacherRepository.GetTeachersByClass(class1));
+                List<Teacher> teachers = teacherRepository.GetTeachersByClass(class1);
+                List<TeacherDTO> teacherDTOs = _mapper.Map<List<TeacherDTO>>(teachers);
+                return Ok(teacherDTOs);
+               // return Ok(teacherRepository.GetTeachersByClass(class1));
             }
             catch (Exception)
             {
@@ -140,7 +148,10 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-                return Ok(teacherRepository.GetTeachersBySubject(subject));
+                List<Teacher> teachers = teacherRepository.GetTeachersBySubject(subject);
+                List<TeacherDTO> teacherDTOs = _mapper.Map<List<TeacherDTO>>(teachers);
+                return Ok(teacherDTOs);
+                //return Ok(teacherRepository.GetTeachersBySubject(subject));
             }
             catch (Exception)
             {

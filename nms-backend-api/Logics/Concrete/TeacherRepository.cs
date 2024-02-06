@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using nms_backend_api.Entity;
 using nms_backend_api.Logics.Contract;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -8,8 +9,8 @@ namespace nms_backend_api.Logics.Concrete
     public class TeacherRepository : ITeacherRepository
     {
         private readonly MyContext _context;
-
-        public TeacherRepository(MyContext context)
+        private readonly IMapper _mapper;
+        public TeacherRepository(MyContext context, IMapper mapper)
         {
             _context = context;
         }
