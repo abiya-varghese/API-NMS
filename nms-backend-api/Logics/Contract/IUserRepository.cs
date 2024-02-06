@@ -1,4 +1,5 @@
 ﻿using nms_backend_api.Entity;
+using nms_backend_api.Models;
 
 namespace nms_backend_api.Logics.Contract
 {
@@ -9,5 +10,7 @@ namespace nms_backend_api.Logics.Contract
         List<User> GetAllUsers();
         User GetById(int id);
         void UpdateUser(User user);
+
+        User UserValidation(Login login);
     }
 }

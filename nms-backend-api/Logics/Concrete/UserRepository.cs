@@ -1,5 +1,7 @@
 ﻿using nms_backend_api.Entity;
 using nms_backend_api.Logics.Contract;
+using nms_backend_api.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace nms_backend_api.Logics.Concrete
 {
@@ -14,61 +16,91 @@ namespace nms_backend_api.Logics.Concrete
 
         public void AddUser(User user)
         {
-            string tempPass = "Password@123";
-            string tempUname = (from s in _context.students
-                                where s.StudentId == user.UserId
-                                select s.FirstName).FirstOrDefault();
-            user.Password = tempPass;
-            if (user.Role == "student")
+            try
             {
-                user.UserName = "snex" + tempUname;
+                _context.users.Add(user);
+                _context.SaveChanges();
             }
-            else if (user.Role == "teacher")
+            catch (Exception)
             {
-                user.UserName = "tnex" + tempUname;
+
+                throw;
             }
-            _context.users.Add(user);
-            _context.SaveChanges();
         }
 
         public void DeleteUser(int id)
         {
-            User user = _context.users.Find(id);
-            _context.users.Remove(user);
-            _context.SaveChanges();
+            try
+            {
+                User user = _context.users.Find(id);
+                _context.users.Remove(user);
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<User> GetAllUsers()
         {
-            return _context.users.ToList();
+            try
+            {
+                return _context.users.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public User GetById(int id)
         {
-            User user = _context.users.Find(id);
-            return user;
+            try
+            {
+                User user = _context.users.Find(id);
+                return user;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void UpdateUser(User user)
         {
-            if (user.Role == "student")
+            try
             {
-                string tempUname = (from s in _context.students
-                                    join u in _context.users on s.StudentId equals u.UserId
-                                    select s.FirstName).SingleOrDefault();
 
-                user.UserName = "snex" + tempUname;
+                _context.users.Update(user);
+                _context.SaveChanges();
             }
-            else if (user.Role == "teacher")
+            catch (Exception)
             {
-                string tempUname = (from t in _context.teachers
-                                    join u in _context.users on t.TeacherId equals u.UserId
-                                    where t.TeacherId == u.UserId
-                                    select t.FName).SingleOrDefault();
-                user.UserName = "tnex" + tempUname;
+
+                throw;
             }
-            _context.users.Update(user);
-            _context.SaveChanges();
+        }
+
+        public User UserValidation(Login login)
+        {
+            try
+            {
+                var user = _context.users.SingleOrDefault(x => x.UserName == login.UserName);
+                if (user == null || user.Password != login.Password)
+                {
+                    throw new ValidationException("Invalid username or password.");
+                }
+                return user;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

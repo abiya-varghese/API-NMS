@@ -18,7 +18,7 @@ namespace nms_backend_api.Controllers
         //add
         [HttpPost]
         [Route("AddUser")]
-        public IActionResult AddUser(User user)
+        public IActionResult AddUser([FromBody] User user)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace nms_backend_api.Controllers
             try
             {
                 _userRepository.DeleteUser(id);
-                return Ok("Attendence deleted Succesfully");
+                return Ok("User deleted Succesfully");
             }
             catch (Exception)
             {
