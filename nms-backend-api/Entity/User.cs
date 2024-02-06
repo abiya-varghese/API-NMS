@@ -20,5 +20,8 @@ namespace nms_backend_api.Entity
         [Required]
         [StringLength(20)]
         public string Role { get; set; }
+
+        [Required]
+        public bool Status { get; set; } //activated=true  not activated=false
     }
 }
