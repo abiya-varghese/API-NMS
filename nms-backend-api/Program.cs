@@ -24,6 +24,16 @@ namespace nms_backend_api
 
             builder.Services.AddControllers();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            //enable cors to the project
+            builder.Services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options =>
+                {
+                    options.AllowAnyOrigin()    //allow any client url
+                    .AllowAnyMethod() //allow any http method
+                    .AllowAnyHeader(); //allow any header
+                });
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -38,7 +48,8 @@ namespace nms_backend_api
             }
 
             app.UseAuthorization();
-
+            //add cors middleware
+            app.UseCors("AllowOrigin");
 
             app.MapControllers();
 

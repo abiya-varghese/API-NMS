@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using nms_backend_api.Entity;
 using nms_backend_api.Logics.Concrete;
 using nms_backend_api.Logics.Contract;
+using nms_backend_api.Models;
 
 namespace nms_backend_api.Controllers
 {
@@ -43,7 +44,6 @@ namespace nms_backend_api.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -97,6 +97,13 @@ namespace nms_backend_api.Controllers
 
                 throw;
             }
+        }
+        [HttpPost]
+        [Route("Validate")]
+        public IActionResult ValidateUser(Login login)
+        {
+            return Ok(_userRepository.UserValidation(login));
+
         }
     }
 }
