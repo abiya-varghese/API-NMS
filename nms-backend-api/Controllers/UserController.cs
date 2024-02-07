@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using nms_backend_api.Entity;
@@ -25,14 +26,21 @@ namespace nms_backend_api.Controllers
         }
         //add
         [HttpPost]
-        [Route("AddUser")]
+        [Route("Register")]
         [AllowAnonymous]
         public IActionResult AddUser([FromBody] User user)
         {
             try
             {
-                _userRepository.AddUser(user);
-                return Ok("User added Succesfully");
+               // if(_userRepository.CheckRegister(user.Role, user.AdmissionId))
+                {
+                    _userRepository.AddUser(user);
+                    return Ok("User added Succesfully");
+                }
+               // else
+                {
+                    return BadRequest($"No Id in {user.Role} Register");
+                }
             }
             catch (Exception)
             {

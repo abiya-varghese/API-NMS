@@ -12,5 +12,6 @@ namespace nms_backend_api.Logics.Contract
         void UpdateUser(User user);
 
         User UserValidation(Login login);
+        bool CheckRegister(string Role, int id);
     }
 }

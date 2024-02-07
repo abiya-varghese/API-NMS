@@ -22,6 +22,15 @@ namespace nms_backend_api.Entity
         public string Role { get; set; }
 
         [Required]
-        public bool Status { get; set; } //activated=true  not activated=false
+        [Column("PhoneNo", TypeName = "varchar")]
+        [StringLength(15)]
+        public string PhoneNum { get; set; }
+        [Required] //set not null constraint
+        [Column("EmailId", TypeName = "varchar")]
+        [StringLength(30)]
+        public string Emailid { get; set; }
+
+        [Required]
+        public int AdmissionId { get; set; }
     }
 }

@@ -98,5 +98,20 @@ namespace nms_backend_api.Logics.Concrete
                 throw;
             }
         }
+        public bool CheckRegister(string Role,int id)
+        {
+            if (Role == "Student")
+            {
+               return _context.students.Any(x=>x.StudentId == id);
+            }
+            else if (Role =="Teacher")
+            {
+               return _context.teachers.Any(x=>x.TeacherId == id);
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
