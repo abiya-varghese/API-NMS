@@ -89,8 +89,8 @@ namespace nms_backend_api.Logics.Concrete
         {
             try
             {
-                Class1 classes = _context.class1.Find(id);
-                _context.class1.Remove(classes);
+                ScheduleClass schclass = _context.Schclass.Find(id);
+                _context.Schclass.Remove(schclass);
                 _context.SaveChanges();
             }
             catch (Exception)

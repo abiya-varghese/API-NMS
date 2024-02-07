@@ -42,10 +42,8 @@ namespace nms_backend_api.Controllers
             try
             {
 
-                var item = classs.FirstOrDefault(x => x.ClassId == id);
-
-
-                ScheduleClassDTO classDTOs = _mapper.Map<ScheduleClassDTO>(item);
+                List<ScheduleClass> item = scheduleClassRepository.GetClassByClassID(id);
+                List<ScheduleClassDTO> classDTOs = _mapper.Map<List<ScheduleClassDTO>>(item);
                 return Ok(classDTOs);
             }
             catch (Exception ex)
@@ -60,10 +58,10 @@ namespace nms_backend_api.Controllers
             try
             {
 
-                var item = classs.FirstOrDefault(x => x.Teacher.TeacherId == id);
+                List<ScheduleClass> item = scheduleClassRepository.GetClassByTeacherID(id);
 
 
-                ScheduleClassDTO classDTOs = _mapper.Map<ScheduleClassDTO>(item);
+                List<ScheduleClassDTO> classDTOs = _mapper.Map<List<ScheduleClassDTO>>(item);
                 return Ok(classDTOs);
             }
             catch (Exception ex)
