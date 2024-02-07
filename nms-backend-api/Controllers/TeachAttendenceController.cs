@@ -10,7 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace nms_backend_api.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController] 
+    [ApiController]
     public class TeachAttendenceController : ControllerBase
     {
         private ITeacherAttendenceRepository _teacherAttendenceRepository;
@@ -76,7 +76,8 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-                var item = classs.FirstOrDefault(x => x.TeacherId == id);
+                var item = _teacherAttendenceRepository.GetTeachAttendenceById(id);
+
 
                 if (item == null)
                     return NotFound();
@@ -110,10 +111,10 @@ namespace nms_backend_api.Controllers
                 return StatusCode(404, ex.Message);
 
             }
-            }
+        }
 
-            //edit 
-            [HttpPut]
+        //edit 
+        [HttpPut]
         [Route("Edit")]
         public IActionResult Update(TeacherAttendenceDTO data)
         {

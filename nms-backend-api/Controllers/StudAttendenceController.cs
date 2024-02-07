@@ -77,12 +77,13 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-                var item = classs.FirstOrDefault(x => x.StudentId == studid);
+                var item = _studentAttendenceRepository.GetStudAttendenceById(studid);
 
-                  if (item == null)
-                       return NotFound();
 
-                   return Ok(item);
+                if (item == null)
+                    return NotFound();
+
+                return Ok(item);
             }
             catch (Exception)
             {
@@ -112,10 +113,10 @@ namespace nms_backend_api.Controllers
                 return StatusCode(404, ex.Message);
 
             }
-            }
+        }
 
-            //edit 
-            [HttpPut]
+        //edit 
+        [HttpPut]
         [Route("Edit")]
         public IActionResult Update(StudAttendanceDTO data)
         {

@@ -26,7 +26,7 @@ namespace nms_backend_api.Controllers
         }
 
         [HttpPost, Route("ScheduleExam")]
-        public IActionResult Add([FromBody] ExaminationDTO examination)
+        public IActionResult Add(ExaminationDTO examination)
         {
             try
             {
@@ -69,17 +69,17 @@ namespace nms_backend_api.Controllers
         {
             try
             {
+                var item = _examinationrepository.GetExamByExamId(examId);
 
-                var item = exam.FirstOrDefault(x => x.ExamId == examId);
+                if (item == null)
+                    return NotFound();
 
-
-                ExaminationDTO examDTOs = _mapper.Map<ExaminationDTO>(item);
-                return Ok(examDTOs);
+                return Ok(item);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(404, ex.Message);
 
+                throw;
             }
         }
         [HttpGet, Route("GetExamByClassId/{ClassId}")]
@@ -88,8 +88,10 @@ namespace nms_backend_api.Controllers
             try
             {
 
-                var item = exam.FirstOrDefault(x => x.Class.ClassId == ClassId);
-                ExaminationDTO examDTOs = _mapper.Map<ExaminationDTO>(item);
+                List<Examination> item = _examinationrepository.GetExamByClassId(ClassId);
+
+
+                List<ExaminationDTO> examDTOs = _mapper.Map<List<ExaminationDTO>>(item);
                 return Ok(examDTOs);
             }
             catch (Exception ex)
@@ -174,17 +176,18 @@ namespace nms_backend_api.Controllers
         {
             try
             {
+                var item = _examinationrepository.GetAllResultByStudId(studId);
 
-                var item = mark.FirstOrDefault(x => x.StudentId == studId);
 
+                if (item == null)
+                    return NotFound();
 
-                MarkDTO markDTOs = _mapper.Map<MarkDTO>(item);
-                return Ok(markDTOs);
+                return Ok(item);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(404, ex.Message);
 
+                throw;
             }
         }
         [HttpGet, Route("GetAllResultByExamId/{examId}")]
@@ -193,10 +196,10 @@ namespace nms_backend_api.Controllers
             try
             {
 
-                var item = mark.FirstOrDefault(x => x.ExamId == examId);
+                List<Mark> item = _examinationrepository.GetAllResultByExamId(examId);
 
 
-                MarkDTO markDTOs = _mapper.Map<MarkDTO>(item);
+                List<MarkDTO> markDTOs = _mapper.Map<List<MarkDTO>>(item);
                 return Ok(markDTOs);
             }
             catch (Exception ex)

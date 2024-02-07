@@ -19,7 +19,25 @@ namespace nms_backend_api.Entity
 
         [Required]
         [Column("Marks")]
+
         public float Marks { get; set; }
+
+        [Required]
+        [Column("Subject Name", TypeName = "varchar")]
+        [StringLength(50)]
+        public string? SubjectName { get; set; }
+        [Required]
+        [Column("FirstName", TypeName = "varchar")]
+        [StringLength(50)]
+        public string ExamName { get; set; }
+        [Required]
+        [Column("LastName", TypeName = "varchar")]
+        [StringLength(50)]
+        public string FirstName { get; set; }
+        [Required]
+        [Column("Exam Name", TypeName = "varchar")]
+        [StringLength(50)]
+        public string LastName { get; set; }
 
         [ForeignKey("ExamId")]
         public Examination? examination { get; set; }

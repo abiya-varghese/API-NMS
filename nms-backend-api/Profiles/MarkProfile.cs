@@ -10,7 +10,7 @@ namespace nms_backend_api.Profiles
         public MarkProfile() 
         {
             CreateMap<MarkDTO, Mark>();
-            CreateMap<Mark,MarkDTO>();
+//            CreateMap<Mark,MarkDTO>();
         }
     }
 }
