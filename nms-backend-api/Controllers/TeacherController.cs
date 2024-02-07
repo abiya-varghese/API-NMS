@@ -115,7 +115,7 @@ namespace nms_backend_api.Controllers
             try
             {
                 List<Teacher> teachers = teacherRepository.GetTeachersByClass(class1);
-                List<TeacherDTO> teacherDTOs = _mapper.Map<List<TeacherDTO>>(teachers);
+                List<TeacherClassDTO> teacherDTOs = _mapper.Map<List<TeacherClassDTO>>(teachers);
                 return Ok(teacherDTOs);
                // return Ok(teacherRepository.GetTeachersByClass(class1));
             }
@@ -149,7 +149,7 @@ namespace nms_backend_api.Controllers
             try
             {
                 List<Teacher> teachers = teacherRepository.GetTeachersBySubject(subject);
-                List<TeacherDTO> teacherDTOs = _mapper.Map<List<TeacherDTO>>(teachers);
+                List<TeacherSubjectDTO> teacherDTOs = _mapper.Map<List<TeacherSubjectDTO>>(teachers);
                 return Ok(teacherDTOs);
                 //return Ok(teacherRepository.GetTeachersBySubject(subject));
             }
