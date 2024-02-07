@@ -22,7 +22,7 @@ namespace nms_backend_api.Controllers
             this._mapper = mapper;
             this.scheduleClassRepository = scheduleClassRepository;
         }
-
+        [HttpGet,Route("GetAll")]
         public IActionResult getAll()
         {
             try
