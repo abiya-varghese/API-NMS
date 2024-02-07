@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using nms_backend_api.DTO;
 using nms_backend_api.Entity;
 using nms_backend_api.Logics.Concrete;
 using nms_backend_api.Logics.Contract;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace nms_backend_api.Controllers
 {
@@ -11,25 +14,41 @@ namespace nms_backend_api.Controllers
     public class StudAttendenceController : ControllerBase
     {
         private IStudentAttendenceRepository _studentAttendenceRepository;
-        public StudAttendenceController(IStudentAttendenceRepository studentAttendenceRepository)
+        private readonly IMapper _mapper;
+        public List<StudentAttendence> classs = new List<StudentAttendence>();
+
+        public StudAttendenceController(IStudentAttendenceRepository studentAttendenceRepository, IMapper mapper)
         {
             _studentAttendenceRepository = studentAttendenceRepository;
+            _mapper = mapper;
         }
 
         //addattendence
         [HttpPost]
         [Route("AddAttendence")]
-        public IActionResult AddStudAttendence(StudentAttendence studattendance)
+        public IActionResult AddStudAttendence(StudAttendanceDTO data)
         {
             try
             {
-                _studentAttendenceRepository.AddStudAttendence(studattendance);
-                return Ok("Attendence added Succesfully");
+                //  classRepository.Create(classes);
+                //  return Ok(classes);
+                var _class = _mapper.Map<StudentAttendence>(data); //convert dto to entity
+
+
+                if (ModelState.IsValid)
+                {
+                    _studentAttendenceRepository.AddStudAttendence(_class);
+
+                    return Ok(_class);
+                }
+
+                return new JsonResult("Something went wrong") { StatusCode = 500 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(404, ex.Message);
+
             }
         }
 
@@ -40,12 +59,13 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-                return Ok(_studentAttendenceRepository.GetAllStudAttendances());
+                List<StudentAttendence> student = _studentAttendenceRepository.GetAllStudAttendances();
+                List<StudAttendanceDTO> studentDTOs = _mapper.Map<List<StudAttendanceDTO>>(student);
+                return Ok(studentDTOs);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return StatusCode(404, ex.Message);
             }
         }
 
