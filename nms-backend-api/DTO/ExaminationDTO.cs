@@ -6,6 +6,8 @@
         public string ExamName { get; set; }
         public DateTime ExamDate { get; set; }
         public int ClassId { get; set; }
+        public string? SubjectName { get; set; }
+
 
     }
 }

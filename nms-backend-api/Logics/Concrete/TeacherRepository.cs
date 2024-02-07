@@ -78,8 +78,12 @@ namespace nms_backend_api.Logics.Concrete
         {
             try
             {
-
-                return _context.teachers.Where(z => z.Class == class1).ToList();
+                var teachers=from teacher in _context.teachers
+                             join cls in _context.class1
+                             on teacher.TeacherId equals cls.TeacherId
+                             where teacher.TeacherId==cls.TeacherId
+                             select teacher;
+                return teachers.ToList();
 
             }
             catch (Exception)

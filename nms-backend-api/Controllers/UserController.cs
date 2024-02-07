@@ -1,9 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using nms_backend_api.Entity;
 using nms_backend_api.Logics.Concrete;
 using nms_backend_api.Logics.Contract;
 using nms_backend_api.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace nms_backend_api.Controllers
 {
@@ -12,13 +17,16 @@ namespace nms_backend_api.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository)
+        private readonly IConfiguration _configuration;
+        public UserController(IUserRepository userRepository, IConfiguration configuration)
         {
             _userRepository = userRepository;
+            _configuration = configuration;
         }
         //add
         [HttpPost]
         [Route("AddUser")]
+        [AllowAnonymous]
         public IActionResult AddUser([FromBody] User user)
         {
             try
@@ -36,6 +44,7 @@ namespace nms_backend_api.Controllers
         //GetAll
         [HttpGet]
         [Route("GetAllUsers")]
+        [AllowAnonymous]
         public IActionResult GetAllUsers()
         {
             try
@@ -100,10 +109,60 @@ namespace nms_backend_api.Controllers
         }
         [HttpPost]
         [Route("Validate")]
+        [AllowAnonymous]
         public IActionResult ValidateUser(Login login)
         {
-            return Ok(_userRepository.UserValidation(login));
+            try
+            {
+                User user = _userRepository.UserValidation(login);
+                AuthResponse authReponse = new AuthResponse();
+                if (user != null)
+                {
+                    authReponse.UserId = user.UserId;
+                    authReponse.Role = user.Role;
+                    authReponse.Token = GetToken(user);
+                }
+                return StatusCode(200, authReponse);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
+
+        private string GetToken(User? user)
+        {
+            var issuer = _configuration["Jwt:Issuer"];
+            var audience = _configuration["Jwt:Audience"];
+            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
+            //header part
+            var signingCredentials = new SigningCredentials(
+                new SymmetricSecurityKey(key),
+                SecurityAlgorithms.HmacSha512Signature
+            );
+            //payload part
+            var subject = new ClaimsIdentity(new[]
+            {
+                        new Claim(ClaimTypes.Name,user.UserName),
+                        new Claim(ClaimTypes.Role, user.Role),
+                    });
+
+            var expires = DateTime.UtcNow.AddMinutes(10);
+            //signature part
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = subject,
+                Expires = expires,
+                Issuer = issuer,
+                Audience = audience,
+                SigningCredentials = signingCredentials
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var jwtToken = tokenHandler.WriteToken(token);
+            return jwtToken;
         }
     }
 }

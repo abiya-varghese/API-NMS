@@ -89,11 +89,7 @@ namespace nms_backend_api.Logics.Concrete
         {
             try
             {
-                var user = _context.users.SingleOrDefault(x => x.UserName == login.UserName);
-                if (user == null || user.Password != login.Password)
-                {
-                    throw new ValidationException("Invalid username or password.");
-                }
+                var user = _context.users.SingleOrDefault(x => x.UserName == login.UserName && x.Password==login.Password);
                 return user;
             }
             catch (Exception)

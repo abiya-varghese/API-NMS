@@ -28,10 +28,6 @@ namespace nms_backend_api.Entity
         [Column("PhoneNo", TypeName = "varchar")]
         [StringLength(15)]
         public string PhoneNum { get; set; }
-        [Required] //set not null constraint
-        [Column("Class", TypeName = "varchar")]
-        [StringLength(30)]
-        public string Class { get; set; }//to be enum
 
         public DateTime DOB { get; set; }
 
