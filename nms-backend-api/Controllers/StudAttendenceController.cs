@@ -77,7 +77,12 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-                return Ok(_studentAttendenceRepository.GetStudAttendenceById(studid));
+                var item = classs.FirstOrDefault(x => x.StudentId == studid);
+
+                  if (item == null)
+                       return NotFound();
+
+                   return Ok(item);
             }
             catch (Exception)
             {
@@ -95,29 +100,47 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-                return Ok(_studentAttendenceRepository.GetStudentAttendencebyDate(date));
+
+                List<StudentAttendence> item = _studentAttendenceRepository.GetStudentAttendencebyDate(date);
+
+
+                List<StudAttendanceDTO> studDTOs = _mapper.Map<List<StudAttendanceDTO>>(item);
+                return Ok(studDTOs);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                return StatusCode(404, ex.Message);
 
-                throw;
             }
-        }
+            }
 
-        //edit 
-        [HttpPut]
+            //edit 
+            [HttpPut]
         [Route("Edit")]
-        public IActionResult Update(StudentAttendence studattendance)
+        public IActionResult Update(StudAttendanceDTO data)
         {
             try
             {
-                _studentAttendenceRepository.Update(studattendance);
-                return Ok("Updated Succesfully");
+
+                //classRepository.Update(class1);
+                //return Ok(class1);
+                var _class = _mapper.Map<StudentAttendence>(data); //convert dto to entity
+
+
+                if (ModelState.IsValid)
+                {
+                    _studentAttendenceRepository.Update(_class);
+
+                    return Ok(_class);
+                }
+
+                return new JsonResult("Something went wrong") { StatusCode = 500 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(404, ex.Message);
+
             }
         }
 

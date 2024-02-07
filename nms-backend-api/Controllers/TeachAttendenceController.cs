@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using nms_backend_api.DTO;
 using nms_backend_api.Entity;
 using nms_backend_api.Logics.Concrete;
 using nms_backend_api.Logics.Contract;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace nms_backend_api.Controllers
 {
@@ -11,25 +14,40 @@ namespace nms_backend_api.Controllers
     public class TeachAttendenceController : ControllerBase
     {
         private ITeacherAttendenceRepository _teacherAttendenceRepository;
-        public TeachAttendenceController(ITeacherAttendenceRepository teacherAttendenceRepository)
+        private readonly IMapper _mapper;
+        public List<TeacherAttendence> classs = new List<TeacherAttendence>();
+        public TeachAttendenceController(ITeacherAttendenceRepository teacherAttendenceRepository, IMapper mapper)
         {
             _teacherAttendenceRepository = teacherAttendenceRepository;
+            _mapper = mapper;
         }
 
         //addattendence
         [HttpPost]
         [Route("AddAttendence")]
-        public IActionResult AddTeachAttendence(TeacherAttendence teachattendance)
+        public IActionResult AddTeachAttendence(TeacherAttendenceDTO data)
         {
             try
             {
-                _teacherAttendenceRepository.AddTeachAttendence(teachattendance);
-                return Ok("Attendence added Succesfully");
+                //  classRepository.Create(classes);
+                //  return Ok(classes);
+                var _class = _mapper.Map<TeacherAttendence>(data); //convert dto to entity
+
+
+                if (ModelState.IsValid)
+                {
+                    _teacherAttendenceRepository.AddTeachAttendence(_class);
+
+                    return Ok(_class);
+                }
+
+                return new JsonResult("Something went wrong") { StatusCode = 500 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(404, ex.Message);
+
             }
         }
 
@@ -40,12 +58,13 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-                return Ok(_teacherAttendenceRepository.GetAllTeachAttendences());
+                List<TeacherAttendence> teacher = _teacherAttendenceRepository.GetAllTeachAttendences();
+                List<TeacherAttendenceDTO> teacherDTOs = _mapper.Map<List<TeacherAttendenceDTO>>(teacher);
+                return Ok(teacherDTOs);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return StatusCode(404, ex.Message);
             }
         }
 
@@ -57,7 +76,12 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-                return Ok(_teacherAttendenceRepository.GetTeachAttendenceById(id));
+                var item = classs.FirstOrDefault(x => x.TeacherId == id);
+
+                if (item == null)
+                    return NotFound();
+
+                return Ok(item);
             }
             catch (Exception)
             {
@@ -74,29 +98,47 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-                return Ok(_teacherAttendenceRepository.GetTeachersAttendencebyDate(date));
+
+                List<TeacherAttendence> item = _teacherAttendenceRepository.GetTeachersAttendencebyDate(date);
+
+
+                List<TeacherAttendenceDTO> teacherDTOs = _mapper.Map<List<TeacherAttendenceDTO>>(item);
+                return Ok(teacherDTOs);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                return StatusCode(404, ex.Message);
 
-                throw;
             }
-        }
+            }
 
-        //edit 
-        [HttpPut]
+            //edit 
+            [HttpPut]
         [Route("Edit")]
-        public IActionResult Update(TeacherAttendence teachattendance)
+        public IActionResult Update(TeacherAttendenceDTO data)
         {
             try
             {
-                _teacherAttendenceRepository.Update(teachattendance);
-                return Ok("Updated Succesfully");
+
+                //classRepository.Update(class1);
+                //return Ok(class1);
+                var _class = _mapper.Map<TeacherAttendence>(data); //convert dto to entity
+
+
+                if (ModelState.IsValid)
+                {
+                    _teacherAttendenceRepository.Update(_class);
+
+                    return Ok(_class);
+                }
+
+                return new JsonResult("Something went wrong") { StatusCode = 500 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(404, ex.Message);
+
             }
         }
 
