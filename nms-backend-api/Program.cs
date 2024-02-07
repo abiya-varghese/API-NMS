@@ -14,7 +14,7 @@ namespace nms_backend_api
 
             // Add services to the container.
             builder.Services.AddDbContext<MyContext>();
-            builder.Services.AddTransient< StudentRepository>();
+            builder.Services.AddTransient<IStudentRepository, StudentRepository >();
             builder.Services.AddTransient<ITeacherRepository, TeacherRepository>();
             builder.Services.AddTransient<ClassRepository>();
             builder.Services.AddTransient<IStudentAttendenceRepository, StudentAttendenceRepository>();

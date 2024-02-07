@@ -20,19 +20,36 @@ namespace nms_backend_api.Entity
         [StringLength(30)]
         public string LastName { get; set; }
 
-        public DateTime DOB { get; set; }
-
-
-        [Column(TypeName = "char")]
-
-        public string Gender { get; set; }
+        [Required]
+        public int Rollno { get; set; }
 
         [Required]
-        public int ClassId { get; set; }
+        [Column("Address", TypeName = "varchar")]
+        public string Address { get; set; }
+
+        [Required]
+        [Column("Email", TypeName = "varchar")]
+        public string Email { get; set; }
+
+        [Required]
+        public DateTime DOB { get; set; }
+
+        [Required]
+        public int Contactno { get; set; }
+
+        [Column(TypeName = "char")]
+        [StringLength(10)]
+        public string Gender { get; set; }//to be enum
+
+        [Required]
+        public DateTime RegDate { get; set; }
+
+
+        [Required]
+        public int ClassId { get; set; }//to be enum
 
         [ForeignKey("ClassId")]
-        public Class1 class1 { get; set; }
-
+        public Class1? Class { get; set; }
 
     }
 }

@@ -1,4 +1,6 @@
-﻿using nms_backend_api.Entity;
+﻿using AutoMapper;
+using nms_backend_api.DTO;
+using nms_backend_api.Entity;
 using nms_backend_api.Logics.Contract;
 
 namespace nms_backend_api.Logics.Concrete
@@ -6,11 +8,13 @@ namespace nms_backend_api.Logics.Concrete
     public class StudentRepository : IStudentRepository
     {
         private readonly MyContext _context;
-        public StudentRepository(MyContext context)
+        private readonly IMapper mapper;
+        public StudentRepository(MyContext context, IMapper mapper)
         {
             _context = context;
+            this.mapper = mapper;
         }
-       
+
         //add student
         public void AddStudent(Student student)
         {
@@ -26,17 +30,19 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
         //get all students
-        public List<Student> GetAllStudent()
+        public List<StudentDto> GetAllStudent()
         {
-            try
+            List<Student> student = _context.students.ToList();
+            List<StudentDto> studentDto = mapper.Map<List<StudentDto>>(student);
+            foreach (var s in studentDto)
             {
-                return _context.students.ToList();
+                int i = 0;
+                s.Cls = (from c in _context.class1
+                         where c.ClassId == student[i].ClassId
+                         select c.ClassName).Single();
+                i++;
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return (studentDto);
         }
 
         public Student GetStudentByName(string name)
@@ -69,9 +75,7 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-       
-
-
+        //update
         public void Update(Student student)
         {
             try
@@ -100,5 +104,53 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
+        //get student by roll number
+
+        public StudentDto GetStudentByRoll(int rollno)
+        {
+            Student student = _context.students.SingleOrDefault(e => e.Rollno == rollno);
+            StudentDto sdto = mapper.Map<StudentDto>(student);
+
+            sdto.Cls = (from c in _context.class1
+                        where c.ClassId == student.ClassId
+                        select c.ClassName).Single();
+            return sdto;
+        }
+
+        //getstudentbyclass
+        public List<StudentDto> GetStudentByClass(string cls)
+        {
+            List<Student> student = _context.students.Where(S => S.Class.ClassName == cls).ToList();
+            List<StudentDto> studentDto = mapper.Map<List<StudentDto>>(student);
+
+            foreach (var s in studentDto)
+            {
+                int i = 0;
+                s.Cls = (from c in _context.class1
+                         where c.ClassId == student[i].ClassId
+                         select c.ClassName).Single();
+                i++;
+            }
+            return (studentDto);
+        }
+
+        //get student by class and section
+
+        public List<StudentDto> GetAllStudentsByClassandSec(string cls, string sec)
+        {
+            List<Student> student = _context.students.
+                Where(s => s.Class.ClassName == cls && s.Class.Section == sec).ToList();
+
+            List<StudentDto> studentDto = mapper.Map<List<StudentDto>>(student);
+            foreach (var s in studentDto)
+            {
+                int i = 0;
+                s.Cls = (from c in _context.class1
+                         where c.ClassId == student[i].ClassId
+                         select c.ClassName).Single();
+                i++;
+            }
+            return (studentDto);
+        }
     }
 }

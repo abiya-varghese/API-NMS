@@ -12,8 +12,8 @@ using nms_backend_api.Entity;
 namespace nms_backend_api.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240206172355_miguser1")]
-    partial class miguser1
+    [Migration("20240207060407_student1")]
+    partial class student1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,17 +33,17 @@ namespace nms_backend_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClassId"));
 
-                    b.Property<string>("Branch")
+                    b.Property<string>("ClassName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar")
-                        .HasColumnName("Branch");
+                        .HasColumnName("ClassName");
 
-                    b.Property<string>("SemName")
+                    b.Property<string>("Section")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar")
-                        .HasColumnName("SemName");
+                        .HasColumnName("Section");
 
                     b.Property<int>("TeacherId")
                         .HasMaxLength(50)
@@ -78,11 +78,78 @@ namespace nms_backend_api.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("ExamName");
 
+                    b.Property<string>("SubjectName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ExamId");
 
                     b.HasIndex("ClassId");
 
                     b.ToTable("tbl_Examination");
+                });
+
+            modelBuilder.Entity("nms_backend_api.Entity.Mark", b =>
+                {
+                    b.Property<int>("MarkId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MarkId"));
+
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int")
+                        .HasColumnName("ExamId");
+
+                    b.Property<float>("Marks")
+                        .HasColumnType("real")
+                        .HasColumnName("Marks");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int")
+                        .HasColumnName("StudentId");
+
+                    b.HasKey("MarkId");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("tbl_mark");
+                });
+
+            modelBuilder.Entity("nms_backend_api.Entity.ScheduleClass", b =>
+                {
+                    b.Property<int>("ScheduleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScheduleId"));
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int")
+                        .HasColumnName("ClassId");
+
+                    b.Property<string>("Sessiontime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int")
+                        .HasColumnName("TeacherId");
+
+                    b.HasKey("ScheduleId");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("tbl_schedule");
                 });
 
             modelBuilder.Entity("nms_backend_api.Entity.Student", b =>
@@ -93,11 +160,24 @@ namespace nms_backend_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentId"));
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasColumnName("Address");
+
                     b.Property<int>("ClassId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DOB")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("Contactno")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("DOB")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasColumnName("Email");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -107,6 +187,7 @@ namespace nms_backend_api.Migrations
 
                     b.Property<string>("Gender")
                         .IsRequired()
+                        .HasMaxLength(10)
                         .HasColumnType("char");
 
                     b.Property<string>("LastName")
@@ -114,6 +195,12 @@ namespace nms_backend_api.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("varchar")
                         .HasColumnName("LastName");
+
+                    b.Property<DateOnly>("RegDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("Rollno")
+                        .HasColumnType("int");
 
                     b.HasKey("StudentId");
 
@@ -281,15 +368,53 @@ namespace nms_backend_api.Migrations
                     b.Navigation("Class");
                 });
 
-            modelBuilder.Entity("nms_backend_api.Entity.Student", b =>
+            modelBuilder.Entity("nms_backend_api.Entity.Mark", b =>
                 {
-                    b.HasOne("nms_backend_api.Entity.Class1", "class1")
+                    b.HasOne("nms_backend_api.Entity.Examination", "examination")
+                        .WithMany()
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("nms_backend_api.Entity.Student", "student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("examination");
+
+                    b.Navigation("student");
+                });
+
+            modelBuilder.Entity("nms_backend_api.Entity.ScheduleClass", b =>
+                {
+                    b.HasOne("nms_backend_api.Entity.Class1", "Class1")
                         .WithMany()
                         .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("class1");
+                    b.HasOne("nms_backend_api.Entity.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class1");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("nms_backend_api.Entity.Student", b =>
+                {
+                    b.HasOne("nms_backend_api.Entity.Class1", "Class")
+                        .WithMany()
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class");
                 });
 
             modelBuilder.Entity("nms_backend_api.Entity.StudentAttendence", b =>

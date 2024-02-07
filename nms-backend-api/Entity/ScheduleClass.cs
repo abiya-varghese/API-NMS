@@ -23,7 +23,7 @@ namespace nms_backend_api.Entity
 
 
         [ForeignKey("TeacherId")]
-        public Teacher? Teacher { get; set; }
+        public Teacher Teacher { get; set; }
         [ForeignKey("ClassId")]
         public Class1 Class1 { get; set; }
     }
