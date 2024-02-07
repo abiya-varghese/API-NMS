@@ -13,12 +13,12 @@ namespace nms_backend_api.Entity
 
              [Required]
              [StringLength(50)]
-             [Column("SemName", TypeName = "varchar")]
-            public string SemName { get; set; }
+             [Column("ClassName", TypeName = "varchar")]
+            public string ClassName { get; set; }
              [Required]
              [StringLength(50)]
-             [Column("Branch",TypeName="varchar")]
-             public string Branch { get; set; }
+             [Column("Section",TypeName="varchar")]
+             public string Section { get; set; }
         [Required]
         [StringLength(50)]
         [Column("TeacherId")]

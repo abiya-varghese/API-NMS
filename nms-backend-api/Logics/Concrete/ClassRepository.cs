@@ -62,7 +62,7 @@ namespace nms_backend_api.Logics.Concrete
             {
                 foreach (var k in classs)
                 {
-                    if (k.SemName == name)
+                    if (k.ClassName == name)
                     {
                         return k;
                     }

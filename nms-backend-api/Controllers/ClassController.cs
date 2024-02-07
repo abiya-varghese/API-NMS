@@ -55,7 +55,7 @@ namespace nms_backend_api.Controllers
             try
             {
 
-               var item = classs.FirstOrDefault(x => x.SemName == name);
+               var item = classs.FirstOrDefault(x => x.ClassName == name);
 
 
                ClassDTO classDTOs = _mapper.Map<ClassDTO>(item);

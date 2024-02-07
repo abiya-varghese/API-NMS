@@ -3,8 +3,8 @@
     public class ClassDTO
     {
         public int ClassId { get; set; }
-        public string SemName { get; set; }
-        public string Branch { get; set; }
+        public string ClassName { get; set; }
+        public string Section { get; set; }
         public int TeacherId { get; set; }       
     }
 }
