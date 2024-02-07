@@ -71,8 +71,8 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-       
-      
+
+
         public void Update(TeacherAttendence teachattendance)
         {
             try
@@ -87,7 +87,7 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-        public List<TeacherAttendence> GetTeachersAttendencebyDate(int date)
+        public List<TeacherAttendence> GetTeachersAttendencebyDate(DateTime date)
         {
             try
             {

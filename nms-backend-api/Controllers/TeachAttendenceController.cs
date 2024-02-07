@@ -95,7 +95,7 @@ namespace nms_backend_api.Controllers
         [HttpGet]
         [Route("GetattendenceBydate")]
 
-        public IActionResult GetTeachersAttendencebyDate(int date)
+        public IActionResult GetTeachersAttendencebyDate(DateTime date)
         {
             try
             {

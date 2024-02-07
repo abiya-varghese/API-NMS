@@ -8,10 +8,10 @@ namespace nms_backend_api.Logics.Contract
         void AddTeachAttendence(TeacherAttendence teachattendance);
         List<TeacherAttendence> GetAllTeachAttendences();
 
-		//StudentAttendence GetStudAttendenceByName(string name);
-		TeacherAttendence GetTeachAttendenceById(int id);
+        //StudentAttendence GetStudAttendenceByName(string name);
+        TeacherAttendence GetTeachAttendenceById(int id);
 
-        List<TeacherAttendence> GetTeachersAttendencebyDate(int date);
+        List<TeacherAttendence> GetTeachersAttendencebyDate(DateTime date);
         void Update(TeacherAttendence teachattendance);
         void Delete(int id);
 

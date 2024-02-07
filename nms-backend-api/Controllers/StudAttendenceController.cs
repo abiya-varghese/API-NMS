@@ -71,13 +71,13 @@ namespace nms_backend_api.Controllers
 
         //GetStudAttendenceById
         [HttpGet]
-        [Route("GetStudAttendenceById/{studid}")]
+        [Route("GetStudAttendenceByAttendenceId/{attid}")]
 
-        public IActionResult GetStudAttendenceById(int studid)
+        public IActionResult GetStudAttendenceById(int attid)
         {
             try
             {
-                var item = _studentAttendenceRepository.GetStudAttendenceById(studid);
+                var item = _studentAttendenceRepository.GetStudAttendenceById(attid);
 
 
                 if (item == null)
