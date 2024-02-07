@@ -21,7 +21,7 @@ namespace nms_backend_api
             builder.Services.AddTransient<ITeacherAttendenceRepository, TeacherAttendenceRepository>();
             builder.Services.AddTransient<IUserRepository, UserRepository>();
             builder.Services.AddTransient<ExaminationRepository>();
-
+            builder.Services.AddTransient<ScheduleClassRepository>();
             builder.Services.AddControllers();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             //enable cors to the project

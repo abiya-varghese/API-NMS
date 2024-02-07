@@ -6,9 +6,18 @@ namespace nms_backend_api.Logics.Contract
     {
         void Add(Examination examination);
         List<Examination> GetAll();
-        Examination GetExamByExamId( int examId );
-        Examination GetExamByClassId( int ClassId);
+        Examination GetExamByExamId(int examId);
+        List<Examination> GetExamByClassId(int ClassId);
         void UpdateExam(Examination examination);
-        void DeleteExam(int examId );
+        void DeleteExam(int examId);
+
+        void RecordResult(Mark mark);
+        List<Mark> GetAllResult();
+        Mark GetAllResultByStudId(int studId);
+        List<Mark> GetAllResultByExamId(int examId);
+        void UpdateResult(Mark mark);
+        void DeleteResult(int markId);
+
+
     }
 }

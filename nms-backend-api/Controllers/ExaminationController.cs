@@ -17,14 +17,15 @@ namespace nms_backend_api.Controllers
         private readonly ExaminationRepository _examinationrepository;
         private readonly IMapper _mapper;
         public List<Examination> exam = new List<Examination>();
+        public List<Mark> mark = new List<Mark>();
 
-        public ExaminationController(ExaminationRepository examinationrepository,IMapper mapper)
+        public ExaminationController(ExaminationRepository examinationrepository, IMapper mapper)
         {
             _examinationrepository = examinationrepository;
             _mapper = mapper;
         }
 
-        [HttpPost,Route("ScheduleExam")]
+        [HttpPost, Route("ScheduleExam")]
         public IActionResult Add([FromBody] ExaminationDTO examination)
         {
             try
@@ -32,7 +33,6 @@ namespace nms_backend_api.Controllers
                 //  classRepository.Create(classes);
                 //  return Ok(classes);
                 var exam = _mapper.Map<Examination>(examination); //convert dto to entity
-
 
                 if (ModelState.IsValid)
                 {
@@ -49,8 +49,8 @@ namespace nms_backend_api.Controllers
                 return StatusCode(404, ex.Message);
 
             }
-    }
-        [HttpGet,Route("GetAllExam")]
+        }
+        [HttpGet, Route("GetAllExam")]
         public IActionResult GetAll()
         {
             try
@@ -64,8 +64,8 @@ namespace nms_backend_api.Controllers
                 return StatusCode(404, ex.Message);
             }
         }
-        [HttpGet,Route("GetExamByExamId/{examId}")] 
-        public IActionResult GetExamByExamId(int examId) 
+        [HttpGet, Route("GetExamByExamId/{examId}")]
+        public IActionResult GetExamByExamId(int examId)
         {
             try
             {
@@ -89,8 +89,6 @@ namespace nms_backend_api.Controllers
             {
 
                 var item = exam.FirstOrDefault(x => x.Class.ClassId == ClassId);
-
-
                 ExaminationDTO examDTOs = _mapper.Map<ExaminationDTO>(item);
                 return Ok(examDTOs);
             }
@@ -100,12 +98,11 @@ namespace nms_backend_api.Controllers
 
             }
         }
-        [HttpPut,Route("EditExamination")]
+        [HttpPut, Route("EditExamination")]
         public IActionResult Update([FromBody] ExaminationDTO examination)
         {
             try
             {
-
                 //classRepository.Update(class1);
                 //return Ok(class1);
                 var exam = _mapper.Map<Examination>(examination); //convert dto to entity
@@ -126,12 +123,118 @@ namespace nms_backend_api.Controllers
                 return StatusCode(404, ex.Message);
 
             }
-
         }
-        [HttpDelete,Route("DeleteExam/{examId}")]
+        [HttpDelete, Route("DeleteExam/{examId}")]
         public IActionResult Delete(int examId)
         {
             _examinationrepository.DeleteExam(examId);
+            return Ok("Examination deleted");
+        }
+        [HttpPost, Route("RecordResult")]
+        public IActionResult RecordResult([FromBody] MarkDTO mark)
+        {
+            try
+            {
+                //  classRepository.Create(classes);
+                //  return Ok(classes);
+                var exam = _mapper.Map<Mark>(mark); //convert dto to entity
+
+                if (ModelState.IsValid)
+                {
+                    _examinationrepository.RecordResult(exam);
+
+                    return Ok(exam);
+                }
+
+                return new JsonResult("Something went wrong") { StatusCode = 500 };
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(404, ex.Message);
+
+            }
+        }
+        [HttpGet, Route("GetAllResult")]
+        public IActionResult GetAllResult()
+        {
+            try
+            {
+                List<Mark> marks = _examinationrepository.GetAllResult();
+                List<MarkDTO> markDTOs = _mapper.Map<List<MarkDTO>>(marks);
+                return Ok(markDTOs);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, ex.Message);
+            }
+        }
+        [HttpGet, Route("GetAllResultByStudId/{studId}")]
+        public IActionResult GetAllResultByStudId(int studId)
+        {
+            try
+            {
+
+                var item = mark.FirstOrDefault(x => x.StudentId == studId);
+
+
+                MarkDTO markDTOs = _mapper.Map<MarkDTO>(item);
+                return Ok(markDTOs);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, ex.Message);
+
+            }
+        }
+        [HttpGet, Route("GetAllResultByExamId/{examId}")]
+        public IActionResult GetAllResultByExamId(int examId)
+        {
+            try
+            {
+
+                var item = mark.FirstOrDefault(x => x.ExamId == examId);
+
+
+                MarkDTO markDTOs = _mapper.Map<MarkDTO>(item);
+                return Ok(markDTOs);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, ex.Message);
+
+            }
+        }
+        [HttpPut, Route("UpdateResult")]
+        public IActionResult UpdateResult([FromBody] MarkDTO mark)
+        {
+            try
+            {
+                //classRepository.Update(class1);
+                //return Ok(class1);
+                var mar = _mapper.Map<Mark>(mark); //convert dto to entity
+
+
+                if (ModelState.IsValid)
+                {
+                    _examinationrepository.UpdateResult(mar);
+
+                    return Ok(exam);
+                }
+
+                return new JsonResult("Something went wrong") { StatusCode = 500 };
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(404, ex.Message);
+
+            }
+        }
+        [HttpDelete, Route("DeleteResult/{markId}")]
+        public IActionResult DeleteResult(int markId)
+        {
+            _examinationrepository.DeleteResult(markId);
             return Ok("Examination deleted");
         }
     }
