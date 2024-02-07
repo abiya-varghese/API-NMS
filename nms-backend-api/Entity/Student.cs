@@ -25,17 +25,22 @@ namespace nms_backend_api.Entity
 
         [Required]
         [Column("Address", TypeName = "varchar")]
+        [StringLength(50)]
         public string Address { get; set; }
 
-        [Required]
-        [Column("Email", TypeName = "varchar")]
+    
+      
+        [StringLength(50)]
+        [Required(ErrorMessage = "Enter Email")]
+        [EmailAddress(ErrorMessage = "Invalid EmailId")] //validate input value with email fromat
         public string Email { get; set; }
 
         [Required]
         public DateTime DOB { get; set; }
 
-        [Required]
-        public int Contactno { get; set; }
+        [Required(ErrorMessage = "Enter Mobile")]
+        [RegularExpression("[6-9]\\d{9}", ErrorMessage = "Invalid Mobile No")]
+        public string Contactno { get; set; }
 
         [Column(TypeName = "char")]
         [StringLength(10)]

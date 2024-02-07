@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using nms_backend_api.Entity;
 
@@ -11,9 +12,11 @@ using nms_backend_api.Entity;
 namespace nms_backend_api.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20240207121100_studenta")]
+    partial class studenta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,9 +169,9 @@ namespace nms_backend_api.Migrations
                     b.Property<int>("ClassId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Contactno")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Contactno")
+                        .HasMaxLength(12)
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("DOB")
                         .HasColumnType("datetime2");
@@ -176,7 +179,8 @@ namespace nms_backend_api.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar")
+                        .HasColumnName("Email");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -239,6 +243,12 @@ namespace nms_backend_api.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeacherId"));
+
+                    b.Property<string>("Class")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Class");
 
                     b.Property<DateTime>("DOB")
                         .HasColumnType("datetime2");
