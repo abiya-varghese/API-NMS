@@ -15,12 +15,12 @@ namespace nms_backend_api.DTO
 
         public string Address { get; set; }
 
-        public string Email { get; set; }
+        //public string Email { get; set; }
 
         public DateTime DOB { get; set; }
 
 
-        public string Contactno { get; set; }
+       // public string Contactno { get; set; }
 
 
         public string Gender { get; set; }//to be enum
