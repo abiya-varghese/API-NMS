@@ -15,7 +15,7 @@ namespace nms_backend_api.Logics.Concrete
         public TeacherRepository(MyContext context, IMapper mapper)
         {
             _context = context;
-           // _mapper = mapper;
+            _mapper = mapper;
         }
         public void Add(Teacher teacher)
         {
@@ -111,19 +111,22 @@ namespace nms_backend_api.Logics.Concrete
                 var teachers= _context.teachers.Where(z => z.SubjectTaught == subject).ToList();
                 List<TeacherSubjectDTO> teacherDTOs = _mapper.Map<List<TeacherSubjectDTO>>(teachers);
                 int i = 0;
-                List<string> teacherclasses = (List<string>)(from tc in teachers
-                                   join sc in _context.Schclass
-                                   on tc.TeacherId equals sc.TeacherId
-                                   select (from cls in _context.class1
-                                           where cls.ClassId == sc.ClassId
-                                           select cls.ClassName));
-               
-                foreach(var t in teacherDTOs)
+                var teacherClasses = (from tc in teachers
+                                      join sc in _context.Schclass
+                                      on tc.TeacherId equals sc.TeacherId
+                                      join cls in _context.class1
+                                      on sc.ClassId equals cls.ClassId
+                                      select cls.ClassName).ToList(); // Corrected query to fetch ClassNames
+
+                foreach (var t in teacherDTOs)
                 {
-                    t.ClassName = teacherclasses[i];
+                    if (i < teacherClasses.Count) // Check if index is within bounds
+                    {
+                        t.ClassName = teacherClasses[i];
+                    }
                     i++;
                 }
-               
+
                 return (teacherDTOs);
             }
             catch (Exception)

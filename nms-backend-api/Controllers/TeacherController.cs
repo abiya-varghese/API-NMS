@@ -147,11 +147,11 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-                //List<TeacherSubjectDTO> teachers = teacherRepository.GetTeachersBySubject(subject);
-               // List<TeacherSubjectDTO> teacherDTOs = _mapper.Map<List<TeacherSubjectDTO>>(teachers);
+                List<TeacherSubjectDTO> teachers = teacherRepository.GetTeachersBySubject(subject);
+                List<TeacherSubjectDTO> teacherDTOs = _mapper.Map<List<TeacherSubjectDTO>>(teachers);
 
-               // return Ok(teachers);
-                return Ok(teacherRepository.GetTeachersBySubject(subject));
+                return Ok(teachers);
+               // return Ok(teacherRepository.GetTeachersBySubject(subject));
             }
             catch (Exception)
             {
