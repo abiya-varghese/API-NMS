@@ -34,10 +34,10 @@ namespace nms_backend_api.Logics.Concrete
         {
             List<Student> student = _context.students.ToList();
             List<StudentDto> studentDto = mapper.Map<List<StudentDto>>(student);
+            int i = 0;
             foreach (var s in studentDto)
-            {
-                int i = 0;
-                s.Cls = (from c in _context.class1
+            {              
+                s.ClassName = (from c in _context.class1
                          where c.ClassId == student[i].ClassId
                          select c.ClassName).Single();
                 i++;
@@ -62,11 +62,16 @@ namespace nms_backend_api.Logics.Concrete
         }
 
         //get students by id
-        public Student GetStudentById(string studid)
+        public StudentDto GetStudentById(string studid)
         {
             try
             {
-                return _context.students.Find(studid);
+               var stud= _context.students.Find(studid);
+                StudentDto studentDto = mapper.Map<StudentDto>(stud);
+                studentDto.ClassName = (from c in _context.class1
+                               where c.ClassId == stud.ClassId
+                               select c.ClassName).Single();
+                return studentDto;
             }
             catch (Exception)
             {
@@ -111,7 +116,7 @@ namespace nms_backend_api.Logics.Concrete
             Student student = _context.students.SingleOrDefault(e => e.Rollno == rollno);
             StudentDto sdto = mapper.Map<StudentDto>(student);
 
-            sdto.Cls = (from c in _context.class1
+            sdto.ClassName = (from c in _context.class1
                         where c.ClassId == student.ClassId
                         select c.ClassName).Single();
             return sdto;
@@ -126,7 +131,7 @@ namespace nms_backend_api.Logics.Concrete
             foreach (var s in studentDto)
             {
                 int i = 0;
-                s.Cls = (from c in _context.class1
+                s.ClassName = (from c in _context.class1
                          where c.ClassId == student[i].ClassId
                          select c.ClassName).Single();
                 i++;
@@ -145,7 +150,7 @@ namespace nms_backend_api.Logics.Concrete
             foreach (var s in studentDto)
             {
                 int i = 0;
-                s.Cls = (from c in _context.class1
+                s.ClassName = (from c in _context.class1
                          where c.ClassId == student[i].ClassId
                          select c.ClassName).Single();
                 i++;

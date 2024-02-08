@@ -16,7 +16,7 @@ namespace nms_backend_api.Logics.Contract
 
 
         Student GetStudentByName(string name);
-        Student GetStudentById(string studid);
+        StudentDto GetStudentById(string studid);
 
         void Update(Student student);
         void Delete(string id);

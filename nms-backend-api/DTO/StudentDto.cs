@@ -12,7 +12,7 @@ namespace nms_backend_api.DTO
 
         public string Rollno { get; set; }
 
-        public string Cls { get; set; }
+        public string ClassName { get; set; }
 
         public string Address { get; set; }
 

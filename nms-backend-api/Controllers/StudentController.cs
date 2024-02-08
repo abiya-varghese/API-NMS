@@ -280,7 +280,7 @@ namespace nms_backend_api.Controllers
 
         //delete books
         [HttpDelete]
-        [Route("DeleteStudent")]
+        [Route("DeleteStudent/{id}")]
         public IActionResult Delete(string id)
         {
             try
