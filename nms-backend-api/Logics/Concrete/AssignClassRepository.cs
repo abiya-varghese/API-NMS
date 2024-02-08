@@ -11,16 +11,16 @@ namespace nms_backend_api.Logics.Concrete
         {
             _context = context;
         }
-        public Teacher GetTeacherById(int teacherId)
+        public Teacher GetTeacherById(string teacherId)
         {
             return _context.teachers.FirstOrDefault(t => t.TeacherId == teacherId);
         }
 
-        public Class1 GetClassById(int classId)
+        public Class1 GetClassById(string classId)
         {
             return _context.class1.FirstOrDefault(c => c.ClassId == classId);
         }
-        public void AssignTeacherToClass(int classid, int  teacherid)
+        public void AssignTeacherToClass(string classid, string teacherid)
         {
             var teacher = GetTeacherById(teacherid);
             var classEntity = GetClassById(classid);

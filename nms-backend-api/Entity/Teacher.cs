@@ -7,7 +7,7 @@ namespace nms_backend_api.Entity
     public class Teacher
     {
         [Key]
-        public int TeacherId { get; set; }
+        public string TeacherId { get; set; }
 
         [Required] //set not null constraint
         [Column("FirstName", TypeName = "varchar")]
@@ -19,16 +19,6 @@ namespace nms_backend_api.Entity
         [StringLength(30)]
         public string LName { get; set; }
 
-        [Required] //set not null constraint
-        [Column("EmailId", TypeName = "varchar")]
-        [StringLength(30)]
-        public string Emailid { get; set; }
-
-        [Required]
-        [Column("PhoneNo", TypeName = "varchar")]
-        [StringLength(15)]
-        public string PhoneNum { get; set; }
-
         public DateTime DOB { get; set; }
 
         [Column(TypeName = "char")]
@@ -38,6 +28,6 @@ namespace nms_backend_api.Entity
 
         [Column(TypeName = "varchar")]
         [StringLength(30)]
-        public string Subject { get; set; }
+        public string SubjectTaught { get; set; }
     }
 }

@@ -7,15 +7,15 @@ namespace nms_backend_api.Entity
     public class Mark
     {
         [Key]
-        public int MarkId { get; set; }
+        public string MarkId { get; set; }
 
         [Required]
         [Column("StudentId")]
-        public int StudentId { get; set; }
+        public string StudentId { get; set; }
 
         [Required]
         [Column("ExamId")]
-        public int ExamId { get; set; }
+        public string ExamId { get; set; }
 
         [Required]
         [Column("Marks")]

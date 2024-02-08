@@ -37,7 +37,7 @@ namespace nms_backend_api.Controllers
             }
         }
         [HttpGet, Route("GetClassByClassId/{id}")]
-        public IActionResult getClassByClassId(int id)
+        public IActionResult getClassByClassId(string id)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace nms_backend_api.Controllers
             }
         }
         [HttpGet, Route("GetClassBytrId/{id}")]
-        public IActionResult getClassByTrId(int id)
+        public IActionResult getClassByTrId(string id)
         {
             try
             {
@@ -125,7 +125,7 @@ namespace nms_backend_api.Controllers
         }
 
         [HttpDelete, Route("deleteClassSchedule/{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             try
             {

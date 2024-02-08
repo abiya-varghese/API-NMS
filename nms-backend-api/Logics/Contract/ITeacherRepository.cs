@@ -6,8 +6,8 @@ namespace nms_backend_api.Logics.Contract
     {
         void Add(Teacher teacher);
         void Update(Teacher teacher);
-        void Delete(int id);
-        Teacher GetTeacher(int id);
+        void Delete(string id);
+        Teacher GetTeacher(string id);
         List<Teacher> GetAll();
         List<Teacher> GetTeachersBySubject(string subject);
         List<Teacher> GetTeachersByClass(string class1);

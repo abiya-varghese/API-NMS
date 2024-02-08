@@ -6,7 +6,7 @@ namespace nms_backend_api.Logics.Contract
     {
         void Create(Class1 clas );
         void Update(Class1 clas);
-        void Delete(int id);
+        void Delete(string id);
         Class1 GetClassBySemName(string name);
         Class1 GetClassByTeacherName(string name);
 

@@ -6,12 +6,12 @@ namespace nms_backend_api.Logics.Contract
     public interface IUserRepository
     {
         void AddUser(User user);
-        void DeleteUser(int id);
+        void DeleteUser(string id);
         List<User> GetAllUsers();
-        User GetById(int id);
+        User GetById(string id);
         void UpdateUser(User user);
 
         User UserValidation(Login login);
-        bool CheckRegister(string Role, int id);
+        bool CheckRegister(string Role, string id);
     }
 }

@@ -73,7 +73,7 @@ namespace nms_backend_api.Controllers
         [HttpGet]
         [Route("GetStudAttendenceByAttendenceId/{attid}")]
 
-        public IActionResult GetStudAttendenceById(int attid)
+        public IActionResult GetStudAttendenceById(string attid)
         {
             try
             {
@@ -148,7 +148,7 @@ namespace nms_backend_api.Controllers
         //delete 
         [HttpDelete]
         [Route("Delete")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             try
             {

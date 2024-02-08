@@ -8,8 +8,8 @@ namespace nms_backend_api.Entity
     public class StudentAttendence
     {
         [Key]
-        public int StudAttendenceId { get; set; }
-        public int StudentId { get; set; }
+        public string StudAttendenceId { get; set; }
+        public string StudentId { get; set; }
         [ForeignKey("StudentId")]
 
         public Student? Student { get; set; }

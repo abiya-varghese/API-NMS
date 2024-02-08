@@ -20,14 +20,13 @@ namespace nms_backend_api.Controllers
             this.teacherRepository = teacherRepository;
             _mapper = mapper;
         }
-        [HttpGet]
+        [HttpGet, Route("GetAllTeacher")]
         public IActionResult GetAll()
         {
             try
             {
-               List<Teacher> teachers= teacherRepository.GetAll();
-                List<TeacherDTO> teacherDTOs = _mapper.Map<List<TeacherDTO>>(teachers);
-                return Ok(teacherDTOs);
+               List<Teacher> teachers= teacherRepository.GetAll();           
+                return Ok(teachers);
                 // return Ok(teacherRepository.GetAll());
             }
             catch (Exception)
@@ -66,7 +65,7 @@ namespace nms_backend_api.Controllers
         }
 
         [HttpDelete, Route("Delete/{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             try
             {
@@ -80,7 +79,7 @@ namespace nms_backend_api.Controllers
             }
         }
         [HttpGet, Route("GetTeachersById/{id}")]
-        public IActionResult GetStaff(int id)
+        public IActionResult GetStaff(string id)
         {
             try
             {

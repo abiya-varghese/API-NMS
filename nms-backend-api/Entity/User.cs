@@ -8,7 +8,7 @@ namespace nms_backend_api.Entity
     public class User
     {
         [Key]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -31,6 +31,6 @@ namespace nms_backend_api.Entity
         public string Emailid { get; set; }
 
         [Required]
-        public int AdmissionId { get; set; }
+        public string AdmissionId { get; set; }
     }
 }

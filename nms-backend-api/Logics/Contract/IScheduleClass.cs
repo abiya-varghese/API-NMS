@@ -6,9 +6,9 @@ namespace nms_backend_api.Logics.Contract
     {
         void Create(ScheduleClass clas);
         void Update(ScheduleClass clas);
-        void Delete(int id);
-        List<ScheduleClass> GetClassByTeacherID(int teacherId);
-        List<ScheduleClass> GetClassByClassID(int classId);
+        void Delete(string id);
+        List<ScheduleClass> GetClassByTeacherID(string teacherId);
+        List<ScheduleClass> GetClassByClassID(string classId);
         List<ScheduleClass> GetAll();
 
 

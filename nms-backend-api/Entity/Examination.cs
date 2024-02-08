@@ -8,7 +8,7 @@ namespace nms_backend_api.Entity
     public class Examination
     {
         [Key]
-        public int ExamId { get; set; }
+        public string ExamId { get; set; }
 
         [Required] //set not null constraint
         [StringLength(50)]
@@ -18,7 +18,7 @@ namespace nms_backend_api.Entity
         public DateTime ExamDate { get; set; }
         [Required]
         [Column("ClassId")]
-        public int ClassId { get; set; }
+        public string ClassId { get; set; }
         [Required]
         public string? SubjectName { get; set; }
         [ForeignKey("ClassId")]

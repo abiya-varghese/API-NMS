@@ -6,17 +6,17 @@ namespace nms_backend_api.Logics.Contract
     {
         void Add(Examination examination);
         List<Examination> GetAll();
-        Examination GetExamByExamId(int examId);
-        List<Examination> GetExamByClassId(int ClassId);
+        Examination GetExamByExamId(string examId);
+        List<Examination> GetExamByClassId(string ClassId);
         void UpdateExam(Examination examination);
-        void DeleteExam(int examId);
+        void DeleteExam(string examId);
 
         void RecordResult(Mark mark);
         List<Mark> GetAllResult();
-        Mark GetAllResultByStudId(int studId);
-        List<Mark> GetAllResultByExamId(int examId);
+        Mark GetAllResultByStudId(string studId);
+        List<Mark> GetAllResultByExamId(string examId);
         void UpdateResult(Mark mark);
-        void DeleteResult(int markId);
+        void DeleteResult(string markId);
 
 
     }

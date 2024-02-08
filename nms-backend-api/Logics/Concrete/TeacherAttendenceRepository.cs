@@ -41,7 +41,7 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-        public TeacherAttendence GetTeachAttendenceById(int id)
+        public TeacherAttendence GetTeachAttendenceById(string id)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace nms_backend_api.Logics.Concrete
         }
 
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             try
             {

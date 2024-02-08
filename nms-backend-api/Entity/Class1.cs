@@ -9,7 +9,7 @@ namespace nms_backend_api.Entity
     {
        
             [Key]
-            public int ClassId { get; set; }
+            public string ClassId { get; set; }
 
              [Required]
              [StringLength(50)]
@@ -20,9 +20,8 @@ namespace nms_backend_api.Entity
              [Column("Section",TypeName="varchar")]
              public string Section { get; set; }
         [Required]
-        [StringLength(50)]
         [Column("TeacherId")]
-        public int TeacherId { get; set; }
+        public string TeacherId { get; set; }
 
         [ForeignKey("TeacherId")]
             public Teacher? Teacher { get; set; }

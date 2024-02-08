@@ -4,6 +4,6 @@
     {
         public string FName { get; set; }
         public string LName { get; set; }
-        public string Subject { get; set; }
+        public string SubjectTaught { get; set; }
     }
 }

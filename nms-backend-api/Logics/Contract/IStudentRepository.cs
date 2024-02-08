@@ -8,7 +8,7 @@ namespace nms_backend_api.Logics.Contract
         void AddStudent(Student student);
         List<StudentDto> GetAllStudent();
 
-        StudentDto GetStudentByRoll(int rollno);
+        StudentDto GetStudentByRoll(string rollno);
 
         List<StudentDto> GetStudentByClass(string cls);
 
@@ -16,10 +16,10 @@ namespace nms_backend_api.Logics.Contract
 
 
         Student GetStudentByName(string name);
-        Student GetStudentById(int studid);
+        Student GetStudentById(string studid);
 
         void Update(Student student);
-        void Delete(int id);
+        void Delete(string id);
 
     }
 }

@@ -47,7 +47,7 @@ namespace nms_backend_api.Logics.Concrete
         }
 
         //get attendence by id
-        public StudentAttendence GetStudAttendenceById(int studentId)
+        public StudentAttendence GetStudAttendenceById(string studentId)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace nms_backend_api.Logics.Concrete
         }
 
             //delete
-            public void Delete(int id)
+            public void Delete(string id)
             {
             try
             {

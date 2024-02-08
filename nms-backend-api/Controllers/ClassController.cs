@@ -153,7 +153,7 @@ namespace nms_backend_api.Controllers
 
         }
         [HttpDelete, Route("deleteClass/{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             try
             {

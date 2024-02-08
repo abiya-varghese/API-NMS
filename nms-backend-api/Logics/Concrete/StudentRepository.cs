@@ -62,7 +62,7 @@ namespace nms_backend_api.Logics.Concrete
         }
 
         //get students by id
-        public Student GetStudentById(int studid)
+        public Student GetStudentById(string studid)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace nms_backend_api.Logics.Concrete
                 throw;
             }
         }
-        public void Delete(int id)
+        public void Delete(string id)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace nms_backend_api.Logics.Concrete
 
         //get student by roll number
 
-        public StudentDto GetStudentByRoll(int rollno)
+        public StudentDto GetStudentByRoll(string rollno)
         {
             Student student = _context.students.SingleOrDefault(e => e.Rollno == rollno);
             StudentDto sdto = mapper.Map<StudentDto>(student);

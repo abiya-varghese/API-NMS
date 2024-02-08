@@ -65,7 +65,7 @@ namespace nms_backend_api.Controllers
             }
         }
         [HttpGet, Route("GetExamByExamId/{examId}")]
-        public IActionResult GetExamByExamId(int examId)
+        public IActionResult GetExamByExamId(string examId)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace nms_backend_api.Controllers
             }
         }
         [HttpGet, Route("GetExamByClassId/{ClassId}")]
-        public IActionResult GetExamByClassId(int ClassId)
+        public IActionResult GetExamByClassId(string ClassId)
         {
             try
             {
@@ -127,7 +127,7 @@ namespace nms_backend_api.Controllers
             }
         }
         [HttpDelete, Route("DeleteExam/{examId}")]
-        public IActionResult Delete(int examId)
+        public IActionResult Delete(string examId)
         {
             _examinationrepository.DeleteExam(examId);
             return Ok("Examination deleted");
@@ -172,7 +172,7 @@ namespace nms_backend_api.Controllers
             }
         }
         [HttpGet, Route("GetAllResultByStudId/{studId}")]
-        public IActionResult GetAllResultByStudId(int studId)
+        public IActionResult GetAllResultByStudId(string studId)
         {
             try
             {
@@ -191,7 +191,7 @@ namespace nms_backend_api.Controllers
             }
         }
         [HttpGet, Route("GetAllResultByExamId/{examId}")]
-        public IActionResult GetAllResultByExamId(int examId)
+        public IActionResult GetAllResultByExamId(string examId)
         {
             try
             {
@@ -235,7 +235,7 @@ namespace nms_backend_api.Controllers
             }
         }
         [HttpDelete, Route("DeleteResult/{markId}")]
-        public IActionResult DeleteResult(int markId)
+        public IActionResult DeleteResult(string markId)
         {
             _examinationrepository.DeleteResult(markId);
             return Ok("Examination deleted");

@@ -6,9 +6,9 @@ namespace nms_backend_api.Entity
     public class TeacherAttendence
     {
         [Key]
-        public int TeacherAttendId { get; set; }
+        public string TeacherAttendId { get; set; }
         [Column("TeacherId")]
-        public int TeacherId { get;set; }
+        public string TeacherId { get;set; }
         
 
         [ForeignKey("TeacherId")]

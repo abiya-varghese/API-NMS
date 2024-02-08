@@ -28,7 +28,7 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-        public void DeleteUser(int id)
+        public void DeleteUser(string id)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-        public User GetById(int id)
+        public User GetById(string id)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace nms_backend_api.Logics.Concrete
                 throw;
             }
         }
-        public bool CheckRegister(string Role,int id)
+        public bool CheckRegister(string Role,string id)
         {
             if (Role == "Student")
             {

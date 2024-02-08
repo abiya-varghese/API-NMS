@@ -15,7 +15,7 @@ namespace nms_backend_api.Controllers
             this.assignRepository = assignRepository;
         }
         [HttpPost("assign-teacher-to-class")]
-        public IActionResult AssignTeacherToClass(int teacherId, int classId)
+        public IActionResult AssignTeacherToClass(string teacherId, string classId)
         {
             try
             {

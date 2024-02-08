@@ -7,15 +7,15 @@ namespace nms_backend_api.Entity
     public class ScheduleClass
     {
         [Key]
-        public int ScheduleId { get; set; }
+        public string ScheduleId { get; set; }
 
         [Required]
         [Column("ClassId")]
-        public int ClassId { get; set; }
+        public string ClassId { get; set; }
 
         [Required]
         [Column("TeacherId")]
-        public int TeacherId { get; set; }
+        public string TeacherId { get; set; }
         [StringLength(50)]
         public string Subject { get; set; }
         [Required]

@@ -41,7 +41,7 @@ namespace nms_backend_api.Logics.Concrete
             }
 
         }
-        public List<ScheduleClass> GetClassByClassID(int classId)
+        public List<ScheduleClass> GetClassByClassID(string classId)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-        public List<ScheduleClass> GetClassByTeacherID(int teacherId)
+        public List<ScheduleClass> GetClassByTeacherID(string teacherId)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             try
             {

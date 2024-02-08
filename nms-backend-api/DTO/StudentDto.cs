@@ -10,7 +10,7 @@ namespace nms_backend_api.DTO
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public int Rollno { get; set; }
+        public string Rollno { get; set; }
 
         public string Cls { get; set; }
 
@@ -20,7 +20,7 @@ namespace nms_backend_api.DTO
 
         public DateTime DOB { get; set; }
 
-        public int Contactno { get; set; }
+        public string Contactno { get; set; }
 
         public string Gender { get; set; }//to be enum
 

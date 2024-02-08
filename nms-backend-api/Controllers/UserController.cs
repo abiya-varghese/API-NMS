@@ -69,7 +69,7 @@ namespace nms_backend_api.Controllers
         [HttpGet]
         [Route("GetById/{id}")]
 
-        public IActionResult GetById(int id)
+        public IActionResult GetById(string id)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace nms_backend_api.Controllers
         //delete 
         [HttpDelete]
         [Route("DeleteUser")]
-        public IActionResult DeleteUser(int id)
+        public IActionResult DeleteUser(string id)
         {
             try
             {

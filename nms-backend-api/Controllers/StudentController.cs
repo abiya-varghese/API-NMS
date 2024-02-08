@@ -169,7 +169,7 @@ namespace nms_backend_api.Controllers
         [HttpGet]
         [Route("GetStudentByRoll/{roll}")]
 
-        public IActionResult GetStudentByRoll(int roll)
+        public IActionResult GetStudentByRoll(string roll)
         {
             try
             {
@@ -238,7 +238,7 @@ namespace nms_backend_api.Controllers
         [HttpGet]
         [Route("GetStudentById/{studid}")]
 
-        public IActionResult GetStudentById(int studid)
+        public IActionResult GetStudentById(string studid)
         {
             try
             {
@@ -281,7 +281,7 @@ namespace nms_backend_api.Controllers
         //delete books
         [HttpDelete]
         [Route("DeleteStudent")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             try
             {

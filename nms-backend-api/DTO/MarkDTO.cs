@@ -4,9 +4,9 @@ namespace nms_backend_api.DTO
 {
     public class MarkDTO
     {
-        public int MarkId { get; set; }
-        public int StudentId { get; set; }
-        public int ExamId { get; set; }
+        public string MarkId { get; set; }
+        public string StudentId { get; set; }
+        public string ExamId { get; set; }
         public float Marks { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -27,7 +27,7 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-        public void DeleteExam(int examId)
+        public void DeleteExam(string examId)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-        public List<Examination> GetExamByClassId(int ClassId)
+        public List<Examination> GetExamByClassId(string ClassId)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-        public Examination GetExamByExamId(int examId)
+        public Examination GetExamByExamId(string examId)
         {
             try
             {
@@ -121,7 +121,7 @@ namespace nms_backend_api.Logics.Concrete
                 throw;
             }
         }
-        public Mark GetAllResultByStudId(int studId)
+        public Mark GetAllResultByStudId(string studId)
         {
             try
             {
@@ -133,7 +133,7 @@ namespace nms_backend_api.Logics.Concrete
                 throw;
             }
         }
-        public List<Mark> GetAllResultByExamId(int examId)
+        public List<Mark> GetAllResultByExamId(string examId)
         {
             try
             {
@@ -160,7 +160,7 @@ namespace nms_backend_api.Logics.Concrete
                 throw;
             }
         }
-        public void DeleteResult(int markId)
+        public void DeleteResult(string markId)
         {
             try
             {

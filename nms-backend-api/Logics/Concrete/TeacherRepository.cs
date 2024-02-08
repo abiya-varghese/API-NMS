@@ -28,7 +28,7 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-        public Teacher GetTeacher(int id)
+        public Teacher GetTeacher(string id)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace nms_backend_api.Logics.Concrete
             try
             {
 
-                return _context.teachers.Where(z => z.Subject == subject).ToList();
+                return _context.teachers.Where(z => z.SubjectTaught == subject).ToList();
 
             }
             catch (Exception)

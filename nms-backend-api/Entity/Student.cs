@@ -8,7 +8,7 @@ namespace nms_backend_api.Entity
     {
 
         [Key]
-        public int StudentId { get; set; }
+        public string StudentId { get; set; }
 
         [Required] //set not null constraint
         [Column("FirstName", TypeName = "varchar")]
@@ -21,7 +21,7 @@ namespace nms_backend_api.Entity
         public string LastName { get; set; }
 
         [Required]
-        public int Rollno { get; set; }
+        public string Rollno { get; set; }
 
         [Required]
         [Column("Address", TypeName = "varchar")]
@@ -30,17 +30,10 @@ namespace nms_backend_api.Entity
 
     
       
-        [StringLength(50)]
-        [Required(ErrorMessage = "Enter Email")]
-        [EmailAddress(ErrorMessage = "Invalid EmailId")] //validate input value with email fromat
-        public string Email { get; set; }
-
         [Required]
         public DateTime DOB { get; set; }
 
-        [Required(ErrorMessage = "Enter Mobile")]
-        [RegularExpression("[6-9]\\d{9}", ErrorMessage = "Invalid Mobile No")]
-        public string Contactno { get; set; }
+        
 
         [Column(TypeName = "char")]
         [StringLength(10)]
@@ -51,7 +44,7 @@ namespace nms_backend_api.Entity
 
 
         [Required]
-        public int ClassId { get; set; }//to be enum
+        public string ClassId { get; set; }//to be enum
 
         [ForeignKey("ClassId")]
         public Class1? Class { get; set; }

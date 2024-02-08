@@ -5,8 +5,8 @@ namespace nms_backend_api.Logics.Contract
 {
     public interface IAssignClass
     {
-        Teacher GetTeacherById(int teacherId);
-         Class1 GetClassById(int classId);
-        void AssignTeacherToClass(int classid, int teacherid);
+        Teacher GetTeacherById(string teacherId);
+         Class1 GetClassById(string classId);
+        void AssignTeacherToClass(string classid, string teacherid);
     }
 }

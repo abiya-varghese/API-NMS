@@ -12,8 +12,8 @@ using nms_backend_api.Entity;
 namespace nms_backend_api.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240207181327_migsjjad1")]
-    partial class migsjjad1
+    [Migration("20240208054513_std3")]
+    partial class std3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,8 @@ namespace nms_backend_api.Migrations
 
             modelBuilder.Entity("nms_backend_api.Entity.Class1", b =>
                 {
-                    b.Property<int>("ClassId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClassId"));
+                    b.Property<string>("ClassId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ClassName")
                         .IsRequired()
@@ -45,9 +42,9 @@ namespace nms_backend_api.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Section");
 
-                    b.Property<int>("TeacherId")
-                        .HasMaxLength(50)
-                        .HasColumnType("int")
+                    b.Property<string>("TeacherId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("TeacherId");
 
                     b.HasKey("ClassId");
@@ -59,14 +56,12 @@ namespace nms_backend_api.Migrations
 
             modelBuilder.Entity("nms_backend_api.Entity.Examination", b =>
                 {
-                    b.Property<int>("ExamId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("ExamId")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExamId"));
-
-                    b.Property<int>("ClassId")
-                        .HasColumnType("int")
+                    b.Property<string>("ClassId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("ClassId");
 
                     b.Property<DateTime>("ExamDate")
@@ -91,14 +86,12 @@ namespace nms_backend_api.Migrations
 
             modelBuilder.Entity("nms_backend_api.Entity.Mark", b =>
                 {
-                    b.Property<int>("MarkId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("MarkId")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MarkId"));
-
-                    b.Property<int>("ExamId")
-                        .HasColumnType("int")
+                    b.Property<string>("ExamId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("ExamId");
 
                     b.Property<string>("ExamName")
@@ -123,8 +116,9 @@ namespace nms_backend_api.Migrations
                         .HasColumnType("real")
                         .HasColumnName("Marks");
 
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int")
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("StudentId");
 
                     b.Property<string>("SubjectName")
@@ -144,14 +138,12 @@ namespace nms_backend_api.Migrations
 
             modelBuilder.Entity("nms_backend_api.Entity.ScheduleClass", b =>
                 {
-                    b.Property<int>("ScheduleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("ScheduleId")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScheduleId"));
-
-                    b.Property<int>("ClassId")
-                        .HasColumnType("int")
+                    b.Property<string>("ClassId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("ClassId");
 
                     b.Property<string>("Sessiontime")
@@ -163,8 +155,9 @@ namespace nms_backend_api.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int")
+                    b.Property<string>("TeacherId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("TeacherId");
 
                     b.HasKey("ScheduleId");
@@ -178,11 +171,8 @@ namespace nms_backend_api.Migrations
 
             modelBuilder.Entity("nms_backend_api.Entity.Student", b =>
                 {
-                    b.Property<int>("StudentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentId"));
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -190,20 +180,12 @@ namespace nms_backend_api.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Address");
 
-                    b.Property<int>("ClassId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Contactno")
+                    b.Property<string>("ClassId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DOB")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -225,8 +207,9 @@ namespace nms_backend_api.Migrations
                     b.Property<DateTime>("RegDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Rollno")
-                        .HasColumnType("int");
+                    b.Property<string>("Rollno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StudentId");
 
@@ -237,17 +220,15 @@ namespace nms_backend_api.Migrations
 
             modelBuilder.Entity("nms_backend_api.Entity.StudentAttendence", b =>
                 {
-                    b.Property<int>("StudAttendenceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudAttendenceId"));
+                    b.Property<string>("StudAttendenceId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("AttendanceDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("status")
                         .HasColumnType("bit");
@@ -261,20 +242,11 @@ namespace nms_backend_api.Migrations
 
             modelBuilder.Entity("nms_backend_api.Entity.Teacher", b =>
                 {
-                    b.Property<int>("TeacherId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeacherId"));
+                    b.Property<string>("TeacherId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DOB")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Emailid")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar")
-                        .HasColumnName("EmailId");
 
                     b.Property<string>("FName")
                         .IsRequired()
@@ -293,13 +265,7 @@ namespace nms_backend_api.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("LastName");
 
-                    b.Property<string>("PhoneNum")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("varchar")
-                        .HasColumnName("PhoneNo");
-
-                    b.Property<string>("Subject")
+                    b.Property<string>("SubjectTaught")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("varchar");
@@ -311,17 +277,15 @@ namespace nms_backend_api.Migrations
 
             modelBuilder.Entity("nms_backend_api.Entity.TeacherAttendence", b =>
                 {
-                    b.Property<int>("TeacherAttendId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeacherAttendId"));
+                    b.Property<string>("TeacherAttendId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("AttendanceDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int")
+                    b.Property<string>("TeacherId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("TeacherId");
 
                     b.Property<bool>("status")
@@ -336,14 +300,12 @@ namespace nms_backend_api.Migrations
 
             modelBuilder.Entity("nms_backend_api.Entity.User", b =>
                 {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
-
-                    b.Property<int>("AdmissionId")
-                        .HasColumnType("int");
+                    b.Property<string>("AdmissionId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Emailid")
                         .IsRequired()
