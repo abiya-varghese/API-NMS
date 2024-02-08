@@ -1,4 +1,5 @@
-﻿using nms_backend_api.Entity;
+﻿using nms_backend_api.DTO;
+using nms_backend_api.Entity;
 
 namespace nms_backend_api.Logics.Contract
 {
@@ -9,7 +10,7 @@ namespace nms_backend_api.Logics.Contract
         void Delete(string id);
         Teacher GetTeacher(string id);
         List<Teacher> GetAll();
-        List<Teacher> GetTeachersBySubject(string subject);
+        List<TeacherSubjectDTO> GetTeachersBySubject(string subject);
         List<Teacher> GetTeachersByClass(string class1);
     }
 }

@@ -19,10 +19,11 @@ namespace nms_backend_api.Entity
         [StringLength(30)]
         public string LName { get; set; }
 
+        [Column(TypeName = "Date")]
         public DateTime DOB { get; set; }
 
         [Column(TypeName = "char")]
-        [StringLength(5)]
+        [StringLength(10)]
         public string Gender { get; set; }//to be enum
 
 
