@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace nms_backend_api.Migrations
 {
     /// <inheritdoc />
-    public partial class student1 : Migration
+    public partial class migsjjad1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,9 @@ namespace nms_backend_api.Migrations
                     UserName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Role = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false)
+                    PhoneNo = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false),
+                    EmailId = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
+                    AdmissionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -37,7 +39,6 @@ namespace nms_backend_api.Migrations
                     LastName = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     EmailId = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     PhoneNo = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false),
-                    Class = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     DOB = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Gender = table.Column<string>(type: "char(5)", maxLength: 5, nullable: false),
                     Subject = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
@@ -147,12 +148,12 @@ namespace nms_backend_api.Migrations
                     FirstName = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     LastName = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     Rollno = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "varchar", nullable: false),
-                    Email = table.Column<string>(type: "varchar", nullable: false),
-                    DOB = table.Column<DateOnly>(type: "date", nullable: false),
-                    Contactno = table.Column<int>(type: "int", nullable: false),
+                    Address = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DOB = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Contactno = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<string>(type: "char(10)", maxLength: 10, nullable: false),
-                    RegDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ClassId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -174,7 +175,11 @@ namespace nms_backend_api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StudentId = table.Column<int>(type: "int", nullable: false),
                     ExamId = table.Column<int>(type: "int", nullable: false),
-                    Marks = table.Column<float>(type: "real", nullable: false)
+                    Marks = table.Column<float>(type: "real", nullable: false),
+                    SubjectName = table.Column<string>(name: "Subject Name", type: "varchar(50)", maxLength: 50, nullable: false),
+                    FirstName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    ExamName = table.Column<string>(name: "Exam Name", type: "varchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {

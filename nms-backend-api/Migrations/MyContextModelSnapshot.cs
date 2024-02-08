@@ -98,6 +98,24 @@ namespace nms_backend_api.Migrations
                         .HasColumnType("int")
                         .HasColumnName("ExamId");
 
+                    b.Property<string>("ExamName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("FirstName");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("LastName");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Exam Name");
+
                     b.Property<float>("Marks")
                         .HasColumnType("real")
                         .HasColumnName("Marks");
@@ -105,6 +123,12 @@ namespace nms_backend_api.Migrations
                     b.Property<int>("StudentId")
                         .HasColumnType("int")
                         .HasColumnName("StudentId");
+
+                    b.Property<string>("SubjectName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Subject Name");
 
                     b.HasKey("MarkId");
 
@@ -315,18 +339,30 @@ namespace nms_backend_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
+                    b.Property<int>("AdmissionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Emailid")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar")
+                        .HasColumnName("EmailId");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("PhoneNum")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("varchar")
+                        .HasColumnName("PhoneNo");
+
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .IsRequired()
