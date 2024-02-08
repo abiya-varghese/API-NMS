@@ -162,8 +162,8 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-                List<Mark> marks = _examinationrepository.GetAllResult();
-                List<MarkDTO> markDTOs = _mapper.Map<List<MarkDTO>>(marks);
+                List<Mark> mark = _examinationrepository.GetAllResult();
+                List<MarkDTO> markDTOs = _mapper.Map<List<MarkDTO>>(mark);
                 return Ok(markDTOs);
             }
             catch (Exception ex)

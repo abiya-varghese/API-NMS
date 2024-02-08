@@ -12,8 +12,8 @@ using nms_backend_api.Entity;
 namespace nms_backend_api.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240208054513_std3")]
-    partial class std3
+    [Migration("20240208123711_mig")]
+    partial class mig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,24 +93,6 @@ namespace nms_backend_api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("ExamId");
-
-                    b.Property<string>("ExamName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar")
-                        .HasColumnName("FirstName");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar")
-                        .HasColumnName("LastName");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar")
-                        .HasColumnName("Exam Name");
 
                     b.Property<float>("Marks")
                         .HasColumnType("real")
@@ -246,7 +228,7 @@ namespace nms_backend_api.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DOB")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<string>("FName")
                         .IsRequired()
@@ -256,7 +238,7 @@ namespace nms_backend_api.Migrations
 
                     b.Property<string>("Gender")
                         .IsRequired()
-                        .HasMaxLength(5)
+                        .HasMaxLength(10)
                         .HasColumnType("char");
 
                     b.Property<string>("LName")

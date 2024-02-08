@@ -91,24 +91,6 @@ namespace nms_backend_api.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("ExamId");
 
-                    b.Property<string>("ExamName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar")
-                        .HasColumnName("FirstName");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar")
-                        .HasColumnName("LastName");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar")
-                        .HasColumnName("Exam Name");
-
                     b.Property<float>("Marks")
                         .HasColumnType("real")
                         .HasColumnName("Marks");
@@ -243,7 +225,7 @@ namespace nms_backend_api.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DOB")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<string>("FName")
                         .IsRequired()
@@ -253,7 +235,7 @@ namespace nms_backend_api.Migrations
 
                     b.Property<string>("Gender")
                         .IsRequired()
-                        .HasMaxLength(5)
+                        .HasMaxLength(10)
                         .HasColumnType("char");
 
                     b.Property<string>("LName")

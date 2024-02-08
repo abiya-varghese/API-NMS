@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace nms_backend_api.Migrations
 {
     /// <inheritdoc />
-    public partial class std1 : Migration
+    public partial class mig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,11 +35,9 @@ namespace nms_backend_api.Migrations
                     TeacherId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     LastName = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
-                    EmailId = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
-                    PhoneNo = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false),
-                    DOB = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Gender = table.Column<string>(type: "char(5)", maxLength: 5, nullable: false),
-                    Subject = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
+                    DOB = table.Column<DateTime>(type: "Date", nullable: false),
+                    Gender = table.Column<string>(type: "char(10)", maxLength: 10, nullable: false),
+                    SubjectTaught = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -142,9 +140,7 @@ namespace nms_backend_api.Migrations
                     LastName = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     Rollno = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     DOB = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Contactno = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<string>(type: "char(10)", maxLength: 10, nullable: false),
                     RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ClassId = table.Column<string>(type: "nvarchar(450)", nullable: false)
@@ -168,10 +164,7 @@ namespace nms_backend_api.Migrations
                     StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ExamId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Marks = table.Column<float>(type: "real", nullable: false),
-                    SubjectName = table.Column<string>(name: "Subject Name", type: "varchar(50)", maxLength: 50, nullable: false),
-                    FirstName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    ExamName = table.Column<string>(name: "Exam Name", type: "varchar(50)", maxLength: 50, nullable: false)
+                    SubjectName = table.Column<string>(name: "Subject Name", type: "varchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -205,7 +198,8 @@ namespace nms_backend_api.Migrations
                         name: "FK_tbl_StudentAttendence_tbl_student_StudentId",
                         column: x => x.StudentId,
                         principalTable: "tbl_student",
-                        principalColumn: "StudentId");
+                        principalColumn: "StudentId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
