@@ -22,7 +22,7 @@ namespace nms_backend_api.Controllers
             this._mapper = mapper;
             this.scheduleClassRepository = scheduleClassRepository;
         }
-        [HttpGet,Route("GetAll")]
+        [HttpGet, Route("GetAll")]
         public IActionResult getAll()
         {
             try
@@ -140,6 +140,47 @@ namespace nms_backend_api.Controllers
 
             }
 
+        }
+        [HttpPut, Route("AssignTeacherToClass")]
+        public IActionResult AssignTeacherToClass(ScheduleClassDTO data)
+        {
+            try
+            {
+
+                //classRepository.Update(class1);
+                //return Ok(class1);
+                var _class = _mapper.Map<ScheduleClass>(data); //convert dto to entity
+
+
+                if (ModelState.IsValid)
+                {
+                    scheduleClassRepository.Update(_class);
+
+                    return Ok(_class);
+                }
+
+                return new JsonResult("Something went wrong") { StatusCode = 500 };
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(404, ex.Message);
+
+            }
+        }
+        [HttpGet, Route("GetAllAssignedDetails")]
+        public IActionResult GetAllAssignedDetails()
+        {
+            try
+            {
+                List<ScheduleClass> class1 = scheduleClassRepository.GetAllAssignedDetails();
+                List<ScheduleClassDTO> classDTOs = _mapper.Map<List<ScheduleClassDTO>>(class1);
+                return Ok(classDTOs);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, ex.Message);
+            }
         }
     }
 }

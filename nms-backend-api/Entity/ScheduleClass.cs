@@ -13,9 +13,9 @@ namespace nms_backend_api.Entity
         [Column("ClassId")]
         public string ClassId { get; set; }
 
-        [Required]
+
         [Column("TeacherId")]
-        public string TeacherId { get; set; }
+        public string TeacherId { get; set; } = null;
         [StringLength(50)]
         public string Subject { get; set; }
         [Required]

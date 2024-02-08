@@ -4,7 +4,7 @@
     {
         public string ScheduleId { get; set; }
         public string ClassId { get; set; }
-        public string TeacherId { get; set; }
+        public string TeacherId { get; set; } = null;
         public string Subject { get; set; }
         public string Sessiontime { get; set; }
 

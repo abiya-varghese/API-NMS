@@ -99,5 +99,33 @@ namespace nms_backend_api.Logics.Concrete
                 throw;
             }
         }
+        public void AssignTeacherToClass(ScheduleClass cls)
+        {
+
+            try
+            {
+                _context.Schclass.Update(cls);
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public List<ScheduleClass> GetAllAssignedDetails()
+        {
+            try
+            {
+                return _context.Schclass.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
     }
 }
