@@ -1,5 +1,6 @@
 using nms_backend_api.Entity;
 using nms_backend_api.Logics.Contract;
+using nms_backend_api.Models;
 
 namespace nms_backend_api.Logics.Concrete
 {
@@ -100,6 +101,34 @@ namespace nms_backend_api.Logics.Concrete
 
                 throw;
             }
+        }
+        public AttendenceModel AttendenceReportTeacher(string id, DateTime month)
+        {
+
+            try
+            {
+                var attendances = _context.TeachAttendences.Where(a => a.TeacherId == id && a.AttendanceDate.Date.Month == month.Month).ToList();
+                float TotalDays = attendances.Count();
+                float totalPresentDays = attendances.Count(a => a.status);
+                int totalAbsentDays = attendances.Count(a => !a.status);
+                double attendancePercentage = ((double)totalPresentDays / TotalDays) * 100;
+
+                AttendenceModel att = new AttendenceModel();
+
+                att.TotalPresentDays = totalPresentDays.ToString();
+                att.TotalAbsentDays = totalAbsentDays.ToString();
+                att.Percentage = attendancePercentage.ToString() + "%";
+                att.TotalWorkingDays = TotalDays.ToString();
+                return att;
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
     }
 }

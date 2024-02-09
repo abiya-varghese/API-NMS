@@ -160,5 +160,20 @@ namespace nms_backend_api.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("AttendenceReport/{date}/{id}")]
+        public IActionResult AttendenceReport(string id, DateTime date)
+        {
+            try
+            {
+                return Ok(_teacherAttendenceRepository.AttendenceReportTeacher(id, date));
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

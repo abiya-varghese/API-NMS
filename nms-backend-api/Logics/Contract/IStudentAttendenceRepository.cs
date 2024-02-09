@@ -1,4 +1,5 @@
 ﻿using nms_backend_api.Entity;
+using nms_backend_api.Models;
 
 namespace nms_backend_api.Logics.Contract
 {
@@ -15,6 +16,6 @@ namespace nms_backend_api.Logics.Contract
 
         void Update(StudentAttendence studattendance);
         void Delete(string id);
-
+        public AttendenceModel AttendenceReportStudent(string id, DateTime month);
     }
 }
