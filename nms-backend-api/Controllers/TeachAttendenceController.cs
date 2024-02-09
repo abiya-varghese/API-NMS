@@ -145,7 +145,7 @@ namespace nms_backend_api.Controllers
 
         //delete 
         [HttpDelete]
-        [Route("Delete")]
+        [Route("Delete/{id}")]
         public IActionResult Delete(string id)
         {
             try
