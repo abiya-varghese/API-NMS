@@ -288,7 +288,7 @@ namespace nms_backend_api.Controllers
                 _studentRepository.Delete(id);
                 return Ok("Student deleted Succesfully");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return StatusCode(500, "An errorb occured while processing your request.");

@@ -81,6 +81,21 @@ namespace nms_backend_api.Controllers
                 throw;
             }
         }
+        [HttpGet]
+        [Route("verify-email/{mail}")]
+
+        public IActionResult GetByMail(string mail)
+        {
+            try
+            {
+                return Ok(_userRepository.GetByMail(mail));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         //edit 
         [HttpPut]
@@ -91,6 +106,31 @@ namespace nms_backend_api.Controllers
             {
                 _userRepository.UpdateUser(user);
                 return Ok("Updated Succesfully");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpPut]
+        [Route("reset-password")]
+        public IActionResult ResetPassword(ResetPasswordModel model)
+        {
+            try
+            {
+                var user = _userRepository.GetByMail(model.Email);
+                if (user == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                // Update the user's password
+                user.Password = model.NewPassword;
+                _userRepository.UpdateUser(user);
+
+                return Ok("Updated Successfully");
             }
             catch (Exception)
             {
@@ -138,7 +178,8 @@ namespace nms_backend_api.Controllers
                 throw;
             }
         }
-
+      
+       
         private string GetToken(User? user)
         {
             var issuer = _configuration["Jwt:Issuer"];
@@ -172,5 +213,6 @@ namespace nms_backend_api.Controllers
             var jwtToken = tokenHandler.WriteToken(token);
             return jwtToken;
         }
+        
     }
 }
