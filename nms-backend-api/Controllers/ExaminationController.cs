@@ -238,5 +238,23 @@ namespace nms_backend_api.Controllers
             _examinationrepository.DeleteResult(markId);
             return Ok("Examination deleted");
         }
+        [HttpGet, Route("GetMarkByMarkId/{markid}")]
+        public IActionResult GetMarkByMarkId(string markid)
+        {
+            try
+            {
+                var item = _examinationrepository.GetMarkByMarkId(markid);
+
+                if (item == null)
+                    return NotFound();
+
+                return Ok(item);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

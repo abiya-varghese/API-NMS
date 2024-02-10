@@ -18,6 +18,7 @@ namespace nms_backend_api.Logics.Contract
         void UpdateResult(Mark mark);
         void DeleteResult(string markId);
 
+        Mark GetMarkByMarkId(string markId);
 
     }
 }

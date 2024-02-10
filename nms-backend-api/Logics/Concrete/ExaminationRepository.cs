@@ -176,5 +176,17 @@ namespace nms_backend_api.Logics.Concrete
                 throw;
             }
         }
+        public Mark GetMarkByMarkId(string markId)
+        {
+            try
+            {
+                return _context.mark.Find(markId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
