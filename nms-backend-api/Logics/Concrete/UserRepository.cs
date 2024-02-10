@@ -1,7 +1,6 @@
 ﻿using nms_backend_api.Entity;
 using nms_backend_api.Logics.Contract;
 using nms_backend_api.Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace nms_backend_api.Logics.Concrete
 {
@@ -111,6 +110,19 @@ namespace nms_backend_api.Logics.Concrete
             else
             {
                 return false;
+            }
+        }
+        public User GetByMail(string email)
+        {
+            try
+            {
+                var user = _context.users.FirstOrDefault(x => x.Emailid == email);
+                return user;
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }

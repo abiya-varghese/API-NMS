@@ -145,7 +145,7 @@ namespace nms_backend_api.Controllers
 
         //delete 
         [HttpDelete]
-        [Route("Delete")]
+        [Route("Delete/{id}")]
         public IActionResult Delete(string id)
         {
             try
@@ -156,6 +156,21 @@ namespace nms_backend_api.Controllers
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        [HttpGet]
+        [Route("AttendenceReport/{date}/{id}")]
+        public IActionResult AttendenceReport(string id, DateTime date)
+        {
+            try
+            {
+                return Ok(_teacherAttendenceRepository.AttendenceReportTeacher(id, date));
+
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

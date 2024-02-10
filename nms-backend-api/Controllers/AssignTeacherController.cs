@@ -27,7 +27,7 @@ namespace nms_backend_api.Controllers
             {
                 return NotFound(ex.Message);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(500, "An error occurred while assigning teacher to class.");
             }
