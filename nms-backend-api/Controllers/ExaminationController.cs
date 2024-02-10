@@ -176,13 +176,11 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-                var item = _examinationrepository.GetAllResultByStudId(studId);
+                List<Mark> item = _examinationrepository.GetAllResultByStudId(studId);
 
 
-                if (item == null)
-                    return NotFound();
-
-                return Ok(item);
+                List<MarkDTO> markDTOs = _mapper.Map<List<MarkDTO>>(item);
+                return Ok(markDTOs);
             }
             catch (Exception)
             {

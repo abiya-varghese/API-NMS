@@ -9,7 +9,6 @@ namespace nms_backend_api.DTO
         public string ExamId { get; set; }
         public float Marks { get; set; }
         public string? SubjectName { get; set; }
-        public string ClassName { get; set; }
 
 
     }

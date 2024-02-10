@@ -13,7 +13,7 @@ namespace nms_backend_api.Logics.Contract
 
         void RecordResult(Mark mark);
         List<Mark> GetAllResult();
-        Mark GetAllResultByStudId(string studId);
+        List<Mark> GetAllResultByStudId(string studId);
         List<Mark> GetAllResultByExamId(string examId);
         void UpdateResult(Mark mark);
         void DeleteResult(string markId);

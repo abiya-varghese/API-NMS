@@ -121,11 +121,13 @@ namespace nms_backend_api.Logics.Concrete
                 throw;
             }
         }
-        public Mark GetAllResultByStudId(string studId)
+        public List<Mark> GetAllResultByStudId(string studId)
         {
             try
             {
-                return _context.mark.Find(studId);
+                var exam = _context.mark.Where(
+                    x => x.StudentId.Equals(studId)).ToList();
+                return exam;
             }
             catch (Exception)
             {
