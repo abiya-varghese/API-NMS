@@ -1,4 +1,5 @@
 ﻿using nms_backend_api.Entity;
+using nms_backend_api.Models;
 
 namespace nms_backend_api.Logics.Contract
 {
@@ -19,6 +20,7 @@ namespace nms_backend_api.Logics.Contract
         void DeleteResult(string markId);
 
         Mark GetMarkByMarkId(string markId);
+        public StudentReportModel ReportStudent(string id);
 
     }
 }

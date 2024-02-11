@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using nms_backend_api.Entity;
 using nms_backend_api.Logics.Contract;
+using nms_backend_api.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace nms_backend_api.Logics.Concrete
@@ -181,6 +182,39 @@ namespace nms_backend_api.Logics.Concrete
             try
             {
                 return _context.mark.Find(markId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public StudentReportModel ReportStudent(string id)
+        {
+            try
+            {
+
+
+
+                var student = _context.mark.Where(a => a.StudentId == id).ToList();
+                var total = 0.0;
+                foreach(Mark s in student)
+                {
+                    total = total + s.Marks;
+                }
+                var totalNoofMarks = student.Count();
+                double Percentage = ((double)total / totalNoofMarks) * 100;
+                string studentid=_context.mark.Select(a => a.StudentId).ToString();
+                StudentReportModel att = new StudentReportModel();
+
+                //att.StudentName =student.
+                //att.TotalAbsentDays = totalAbsentDays.ToString();
+                //att.Percentage = attendancePercentage.ToString() + "%";
+                //att.TotalWorkingDays = TotalDays.ToString();
+                return att;
+
+
             }
             catch (Exception)
             {
