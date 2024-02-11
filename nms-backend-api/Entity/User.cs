@@ -7,8 +7,7 @@ namespace nms_backend_api.Entity
 
     public class User
     {
-        [Key]
-        public string UserId { get; set; }
+       // public string UserId { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -25,7 +24,7 @@ namespace nms_backend_api.Entity
         [Column("PhoneNo", TypeName = "varchar")]
         [StringLength(15)]
         public string PhoneNum { get; set; }
-        [Required] //set not null constraint
+        [Key]
         [Column("EmailId", TypeName = "varchar")]
         [StringLength(30)]
         public string Emailid { get; set; }

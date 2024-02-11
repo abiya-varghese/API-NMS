@@ -166,8 +166,9 @@ namespace nms_backend_api.Controllers
                 AuthResponse authReponse = new AuthResponse();
                 if (user != null)
                 {
-                    authReponse.UserId = user.UserId;
+                    authReponse.Emailid = user.Emailid;
                     authReponse.Role = user.Role;
+                    authReponse.AdmissionId = user.AdmissionId;
                     authReponse.Token = GetToken(user);
                 }
                 return StatusCode(200, authReponse);

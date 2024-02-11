@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using nms_backend_api.Entity;
 
@@ -11,9 +12,11 @@ using nms_backend_api.Entity;
 namespace nms_backend_api.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20240211035026_mig1")]
+    partial class mig1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,14 +282,18 @@ namespace nms_backend_api.Migrations
 
             modelBuilder.Entity("nms_backend_api.Entity.User", b =>
                 {
-                    b.Property<string>("Emailid")
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar")
-                        .HasColumnName("EmailId");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AdmissionId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Emailid")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar")
+                        .HasColumnName("EmailId");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -310,7 +317,7 @@ namespace nms_backend_api.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("UserName");
 
-                    b.HasKey("Emailid");
+                    b.HasKey("UserId");
 
                     b.ToTable("tbl_user");
                 });
