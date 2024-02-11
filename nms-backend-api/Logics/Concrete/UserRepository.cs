@@ -1,6 +1,9 @@
-﻿using nms_backend_api.Entity;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using nms_backend_api.Entity;
 using nms_backend_api.Logics.Contract;
 using nms_backend_api.Models;
+using System.Text.RegularExpressions;
 
 namespace nms_backend_api.Logics.Concrete
 {
@@ -20,9 +23,23 @@ namespace nms_backend_api.Logics.Concrete
                 _context.users.Add(user);
                 _context.SaveChanges();
             }
-            catch (Exception)
+            catch (DbUpdateException ex)
             {
+                // Check if the exception is due to a unique constraint violation
+                if (ex.InnerException is SqlException sqlEx &&
+                    sqlEx.Number == 2627)// SQL Server error code for unique constraint violation
+                {
+                    // Extract the name of the constraint from the exception message
+                    var match = Regex.Match(sqlEx.Message, @"'(?<name>.+?)'");
+                    if (match.Success && match.Groups["name"].Value == "PK_tbl_user")
+                    {
+                        // Throw a new exception with a custom error message
+                        
+                        throw new Exception("This email is already used.");
+                    }
+                }
 
+                // Re-throw the original exception if it's not due to a unique constraint violation
                 throw;
             }
         }
