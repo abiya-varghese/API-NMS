@@ -33,12 +33,13 @@ namespace nms_backend_api.Controllers
                 //  classRepository.Create(classes);
                 //  return Ok(classes);
                 var exam = _mapper.Map<Examination>(examination); //convert dto to entity
+                ExaminationDTO examinationDTOs = _mapper.Map<ExaminationDTO>(exam);
 
                 if (ModelState.IsValid)
                 {
                     _examinationrepository.Add(exam);
 
-                    return Ok(exam);
+                    return Ok(examinationDTOs);
                 }
 
                 return new JsonResult("Something went wrong") { StatusCode = 500 };
@@ -70,11 +71,12 @@ namespace nms_backend_api.Controllers
             try
             {
                 var item = _examinationrepository.GetExamByExamId(examId);
+               ExaminationDTO examinationDTOs = _mapper.Map<ExaminationDTO>(item);
 
                 if (item == null)
                     return NotFound();
 
-                return Ok(item);
+                return Ok(examinationDTOs);
             }
             catch (Exception)
             {
@@ -108,13 +110,14 @@ namespace nms_backend_api.Controllers
                 //classRepository.Update(class1);
                 //return Ok(class1);
                 var exam = _mapper.Map<Examination>(examination); //convert dto to entity
+                ExaminationDTO examinationDTOs = _mapper.Map<ExaminationDTO>(exam);
 
 
                 if (ModelState.IsValid)
                 {
                     _examinationrepository.UpdateExam(exam);
 
-                    return Ok(exam);
+                    return Ok(examinationDTOs);
                 }
 
                 return new JsonResult("Something went wrong") { StatusCode = 500 };
@@ -140,12 +143,13 @@ namespace nms_backend_api.Controllers
                 //  classRepository.Create(classes);
                 //  return Ok(classes);
                 var exam = _mapper.Map<Mark>(mark); //convert dto to entity
+                MarkDTO markDTOs = _mapper.Map<MarkDTO>(exam);
 
                 if (ModelState.IsValid)
                 {
                     _examinationrepository.RecordResult(exam);
 
-                    return Ok(exam);
+                    return Ok(markDTOs);
                 }
 
                 return new JsonResult("Something went wrong") { StatusCode = 500 };
@@ -214,13 +218,14 @@ namespace nms_backend_api.Controllers
                 //classRepository.Update(class1);
                 //return Ok(class1);
                 var mar = _mapper.Map<Mark>(mark); //convert dto to entity
+                MarkDTO markDTOs = _mapper.Map<MarkDTO>(mar);
 
 
                 if (ModelState.IsValid)
                 {
                     _examinationrepository.UpdateResult(mar);
 
-                    return Ok(exam);
+                    return Ok(markDTOs);
                 }
 
                 return new JsonResult("Something went wrong") { StatusCode = 500 };
@@ -244,11 +249,12 @@ namespace nms_backend_api.Controllers
             try
             {
                 var item = _examinationrepository.GetMarkByMarkId(markid);
+                MarkDTO markDTOs = _mapper.Map<MarkDTO>(item);
 
                 if (item == null)
                     return NotFound();
 
-                return Ok(item);
+                return Ok(markDTOs);
             }
             catch (Exception)
             {

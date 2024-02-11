@@ -79,12 +79,13 @@ namespace nms_backend_api.Controllers
                 //  return Ok(classes);
                 var _class = _mapper.Map<ScheduleClass>(data); //convert dto to entity
 
+                ScheduleClassDTO classDTOs = _mapper.Map<ScheduleClassDTO>(_class);
 
                 if (ModelState.IsValid)
                 {
                     scheduleClassRepository.Create(_class);
 
-                    return Ok(_class);
+                    return Ok(classDTOs);
                 }
 
                 return new JsonResult("Something went wrong") { StatusCode = 500 };
@@ -106,12 +107,13 @@ namespace nms_backend_api.Controllers
                 //return Ok(class1);
                 var _class = _mapper.Map<ScheduleClass>(data); //convert dto to entity
 
+                ScheduleClassDTO classDTOs = _mapper.Map<ScheduleClassDTO>(_class);
 
                 if (ModelState.IsValid)
                 {
                     scheduleClassRepository.Update(_class);
 
-                    return Ok(_class);
+                    return Ok(classDTOs);
                 }
 
                 return new JsonResult("Something went wrong") { StatusCode = 500 };
@@ -150,13 +152,14 @@ namespace nms_backend_api.Controllers
                 //classRepository.Update(class1);
                 //return Ok(class1);
                 var _class = _mapper.Map<ScheduleClass>(data); //convert dto to entity
+                ScheduleClassDTO classDTOs = _mapper.Map<ScheduleClassDTO>(_class);
 
 
                 if (ModelState.IsValid)
                 {
                     scheduleClassRepository.Update(_class);
 
-                    return Ok(_class);
+                    return Ok(classDTOs);
                 }
 
                 return new JsonResult("Something went wrong") { StatusCode = 500 };
