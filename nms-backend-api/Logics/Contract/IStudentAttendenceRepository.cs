@@ -6,7 +6,8 @@ namespace nms_backend_api.Logics.Contract
     public interface IStudentAttendenceRepository
     {
 
-        void AddStudAttendence(StudentAttendence studattendance);
+        public List<StudentAttendence> AddStudAttendence(DateTime today, string classId, string section);
+
         List<StudentAttendence> GetAllStudAttendances();
 
         //StudentAttendence GetStudAttendenceByName(string name);
@@ -17,5 +18,7 @@ namespace nms_backend_api.Logics.Contract
         void Update(StudentAttendence studattendance);
         void Delete(string id);
         public AttendenceModel AttendenceReportStudent(string id, DateTime month);
+        public List<StudentAttendence> GetStudAttendenceByClassAndSection(DateTime today, string classId, string section);
+
     }
 }

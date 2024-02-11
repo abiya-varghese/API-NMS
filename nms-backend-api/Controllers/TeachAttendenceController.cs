@@ -174,6 +174,35 @@ namespace nms_backend_api.Controllers
                 throw;
             }
         }
+        [HttpPost]
+        [Route("AddTRAttendenceAutogenerate/{date}")]
+        public IActionResult AddtrAttendence(DateTime today)
+        {
+            try
+            {
+                //  classRepository.Create(classes);
+                //  return Ok(classes);
+                //var _class = _mapper.Map<StudentAttendence>(data); //convert dto to entity
 
+
+                //if (ModelState.IsValid)
+                //{
+                //    _studentAttendenceRepository.AddStudAttendence(_class);
+
+                //    return Ok(_class);
+                //}
+
+                //return new JsonResult("Something went wrong") { StatusCode = 500 };
+                List<TeacherAttendence> teacher = _teacherAttendenceRepository.AddTeacherAttendenceAutogenerate(today);
+                List<TeacherAttendenceDTO> teacherDTOs = _mapper.Map<List<TeacherAttendenceDTO>>(teacher);
+                return Ok(teacherDTOs);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(404, ex.Message);
+
+            }
+        }
     }
 }

@@ -130,5 +130,47 @@ namespace nms_backend_api.Logics.Concrete
             }
 
         }
+        public List<TeacherAttendence> AddTeacherAttendenceAutogenerate(DateTime today)
+        {
+            try
+            {
+
+
+                List<TeacherAttendence> ST = (_context.TeachAttendences.Where(s => today == s.AttendanceDate).ToList());
+
+                TeacherAttendence sts = new TeacherAttendence { AttendanceDate = today, TeacherAttendId = "STEST", TeacherId = "S", status = false };
+
+                List<Teacher> s = _context.teachers.ToList();
+
+                if (ST.Count() == 0)
+                {
+                    foreach (Teacher ss in s)
+                    {
+                        Random rnd = new Random();
+                        sts.TeacherId = ss.TeacherId;
+                        sts.AttendanceDate = today;
+                        sts.TeacherAttendId = Guid.NewGuid().ToString();
+                        sts.status = false;
+                        _context.TeachAttendences.Add(sts);
+                        _context.SaveChanges();
+                    }
+                    //_context.StudAttendences.Add(sts);
+                    //_context.SaveChanges();
+
+                    return _context.TeachAttendences.ToList();
+
+
+                }
+
+                return _context.TeachAttendences.ToList();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

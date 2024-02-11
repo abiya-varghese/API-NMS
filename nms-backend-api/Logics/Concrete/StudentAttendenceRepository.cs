@@ -17,19 +17,19 @@ namespace nms_backend_api.Logics.Concrete
         }
 
         //addattendence
-        public void AddStudAttendence(StudentAttendence studattendance)
-        {
-            try
-            {
-                _context.StudAttendences.Add(studattendance);
-                _context.SaveChanges();
-            }
-            catch (Exception)
-            {
+        //public void AddStudAttendence(StudentAttendence studattendance)
+        //{
+        //    try
+        //    {
+        //        _context.StudAttendences.Add(studattendance);
+        //        _context.SaveChanges();
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
-        }
+        //        throw;
+        //    }
+        //}
 
         
 
@@ -140,6 +140,63 @@ namespace nms_backend_api.Logics.Concrete
             }
 
         }
+        public List<StudentAttendence> AddStudAttendence(DateTime today, string classId, string section)
+        {
+            try
+            {
 
+
+                List<StudentAttendence> ST = (_context.StudAttendences.Where(s => today == s.AttendanceDate && s.Student.Class.ClassId == classId && s.Student.Class.Section == section).ToList());
+
+                StudentAttendence sts = new StudentAttendence { AttendanceDate = today, StudAttendenceId = "STEST", StudentId = "S", status = false };
+
+                List<Student> s = _context.students.Where(s => s.Class.ClassId == classId && s.Class.Section == section).ToList();
+
+                if (ST.Count() == 0)
+                {
+                    foreach (Student ss in s)
+                    {
+                        Random rnd = new Random();
+                        sts.StudentId = ss.StudentId;
+                        sts.AttendanceDate = today;
+                        sts.StudAttendenceId = Guid.NewGuid().ToString();
+                        sts.status = false;
+                        _context.StudAttendences.Add(sts);
+                        _context.SaveChanges();
+                    }
+                    //_context.StudAttendences.Add(sts);
+                    //_context.SaveChanges();
+
+                    return _context.StudAttendences.ToList();
+
+
+                }
+
+                return _context.StudAttendences.ToList();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public List<StudentAttendence> GetStudAttendenceByClassAndSection(DateTime today, string classId, string section)
+        {
+            try
+            {
+
+                var studattendences = _context.StudAttendences.Where(
+                         x => x.AttendanceDate.Date.Equals(today) && x.Student.Class.ClassId == classId && x.Student.Class.Section == section).ToList();
+
+                return studattendences;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
  }

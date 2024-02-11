@@ -25,24 +25,27 @@ namespace nms_backend_api.Controllers
 
         //addattendence
         [HttpPost]
-        [Route("AddAttendence")]
-        public IActionResult AddStudAttendence(StudAttendanceDTO data)
+        [Route("AddAttendence/{today}/{classId}/{section}")]
+        public IActionResult AddStudAttendence(DateTime today, string classId, string section)
         {
             try
             {
                 //  classRepository.Create(classes);
                 //  return Ok(classes);
-                var _class = _mapper.Map<StudentAttendence>(data); //convert dto to entity
+                //var _class = _mapper.Map<StudentAttendence>(data); //convert dto to entity
 
 
-                if (ModelState.IsValid)
-                {
-                    _studentAttendenceRepository.AddStudAttendence(_class);
+                //if (ModelState.IsValid)
+                //{
+                //    _studentAttendenceRepository.AddStudAttendence(_class);
 
-                    return Ok(_class);
-                }
+                //    return Ok(_class);
+                //}
 
-                return new JsonResult("Something went wrong") { StatusCode = 500 };
+                //return new JsonResult("Something went wrong") { StatusCode = 500 };
+                List<StudentAttendence> student = _studentAttendenceRepository.AddStudAttendence(today, classId, section);
+                List<StudAttendanceDTO> studentDTOs = _mapper.Map<List<StudAttendanceDTO>>(student);
+                return Ok(studentDTOs);
             }
             catch (Exception ex)
             {
@@ -51,7 +54,6 @@ namespace nms_backend_api.Controllers
 
             }
         }
-
         //GetAllStudAttendances
         [HttpGet]
         [Route("GetAllAttendences")]

@@ -16,6 +16,7 @@ namespace nms_backend_api.Logics.Contract
         void Update(TeacherAttendence teachattendance);
         void Delete(string id);
         public AttendenceModel AttendenceReportTeacher(string id, DateTime month);
+        public List<TeacherAttendence> AddTeacherAttendenceAutogenerate(DateTime today);
 
     }
 }
