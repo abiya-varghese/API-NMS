@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace nms_backend_api.Migrations
 {
     /// <inheritdoc />
-    public partial class mig : Migration
+    public partial class migsajjad : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,17 +15,16 @@ namespace nms_backend_api.Migrations
                 name: "tbl_user",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    EmailId = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     UserName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Role = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     PhoneNo = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false),
-                    EmailId = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     AdmissionId = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tbl_user", x => x.UserId);
+                    table.PrimaryKey("PK_tbl_user", x => x.EmailId);
                 });
 
             migrationBuilder.CreateTable(

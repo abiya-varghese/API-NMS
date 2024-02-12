@@ -129,11 +129,11 @@ namespace nms_backend_api.Logics.Concrete
                 return false;
             }
         }
-        public User GetByMail(string email)
+        public User GetByMailAndPhone(string emailid, string phone)
         {
             try
             {
-                var user = _context.users.FirstOrDefault(x => x.Emailid == email);
+                var user = _context.users.FirstOrDefault(x => x.Emailid == emailid && x.PhoneNum==phone);
                 return user;
             }
             catch (Exception)

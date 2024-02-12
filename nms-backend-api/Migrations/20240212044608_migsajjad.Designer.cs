@@ -12,8 +12,8 @@ using nms_backend_api.Entity;
 namespace nms_backend_api.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240209045947_daaa")]
-    partial class daaa
+    [Migration("20240212044608_migsajjad")]
+    partial class migsajjad
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -282,18 +282,14 @@ namespace nms_backend_api.Migrations
 
             modelBuilder.Entity("nms_backend_api.Entity.User", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Emailid")
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar")
+                        .HasColumnName("EmailId");
 
                     b.Property<string>("AdmissionId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Emailid")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar")
-                        .HasColumnName("EmailId");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -317,7 +313,7 @@ namespace nms_backend_api.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("UserName");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Emailid");
 
                     b.ToTable("tbl_user");
                 });

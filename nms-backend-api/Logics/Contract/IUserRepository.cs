@@ -10,7 +10,7 @@ namespace nms_backend_api.Logics.Contract
         void DeleteUser(string id);
         List<User> GetAllUsers();
         User GetById(string id);
-        User GetByMail(string emailid);
+        User GetByMailAndPhone(string emailid,string phone);
         void UpdateUser(User user);
 
         User UserValidation(Login login);

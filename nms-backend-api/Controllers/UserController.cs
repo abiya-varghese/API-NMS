@@ -82,13 +82,13 @@ namespace nms_backend_api.Controllers
             }
         }
         [HttpGet]
-        [Route("verify-email/{mail}")]
+        [Route("verifyemailandphone/{mail}/{phone}")]
 
-        public IActionResult GetByMail(string mail)
+        public IActionResult GetByMail(string mail, string phone)
         {
             try
             {
-                return Ok(_userRepository.GetByMail(mail));
+                return Ok(_userRepository.GetByMailAndPhone(mail,phone));
             }
             catch (Exception)
             {
@@ -120,7 +120,7 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-                var user = _userRepository.GetByMail(model.Email);
+                var user = _userRepository.GetById(model.Email);
                 if (user == null)
                 {
                     return NotFound("User not found");
