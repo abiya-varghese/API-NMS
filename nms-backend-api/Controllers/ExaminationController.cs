@@ -262,5 +262,22 @@ namespace nms_backend_api.Controllers
                 throw;
             }
         }
+        [HttpGet, Route("GetAllResultByStudIdAndExamId/{studId}/{ExamId}")]
+        public IActionResult GetResultByStudentIdExamID(string studId,string ExamId)
+        {
+            try
+            {
+                List<Mark> item = _examinationrepository.GetResultByStudentIdExamID(studId, ExamId);
+
+
+                List<MarkDTO> markDTOs = _mapper.Map<List<MarkDTO>>(item);
+                return Ok(markDTOs);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

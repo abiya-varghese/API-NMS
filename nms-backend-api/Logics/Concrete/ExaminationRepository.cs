@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using nms_backend_api.DTO;
 using nms_backend_api.Entity;
 using nms_backend_api.Logics.Contract;
 using nms_backend_api.Models;
@@ -190,37 +192,11 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-        //public StudentReportModel ReportStudent(string id)
-        //{
-        //    try
-        //    {
-
-
-
-        //        var student = _context.students.Where(a => a.StudentId == id).ToList();
-        //        var total = 0.0;
-        //        foreach (Mark s in student)
-        //        {
-        //            total = total + s.Marks;
-        //        }
-        //        var totalNoofMarks = student.Count();
-        //        double Percentage = ((double)total / totalNoofMarks) * 100;
-        //        string studentName = _context.mark.Select(a => a.StudentId).ToString();
-        //        StudentReportModel att = new StudentReportModel();
-
-        //        att.StudentName = student.
-        //        att.TotalAbsentDays = totalAbsentDays.ToString();
-        //        att.Percentage = attendancePercentage.ToString() + "%";
-        //        att.TotalWorkingDays = TotalDays.ToString();
-        //        return att;
-
-
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
+       public List<Mark> GetResultByStudentIdExamID(string studentId,string examID)
+        {
+            List<Mark> mark = _context.mark.
+                Where(s => s.StudentId == studentId && s.ExamId == examID).ToList();
+            return (mark);
+        }
     }
 }
