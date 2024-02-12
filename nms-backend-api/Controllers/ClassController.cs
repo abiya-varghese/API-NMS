@@ -14,7 +14,7 @@ namespace nms_backend_api.Controllers
     public class ClassController : ControllerBase
     {
         private readonly IMapper _mapper;
-        public List<Class1> classs = new List<Class1>();
+       // public List<Class1> classs = new List<Class1>();
 
 
         public ClassRepository classRepository;
@@ -55,9 +55,7 @@ namespace nms_backend_api.Controllers
             try
             {
 
-               var item = classs.FirstOrDefault(x => x.ClassName == name);
-
-
+                var item = classRepository.GetClassBySemName(name);
                ClassDTO classDTOs = _mapper.Map<ClassDTO>(item);
                 return Ok(classDTOs);
             }
@@ -73,7 +71,7 @@ namespace nms_backend_api.Controllers
             try
             {
 
-                var item = classs.FirstOrDefault(x => x.Teacher.FName == name);
+                var item = classRepository.GetClassByTeacherName(name);
 
 
                 ClassDTO classDTOs = _mapper.Map<ClassDTO>(item);

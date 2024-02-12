@@ -60,14 +60,8 @@ namespace nms_backend_api.Logics.Concrete
         {
             try
             {
-                foreach (var k in classs)
-                {
-                    if (k.ClassName == name)
-                    {
-                        return k;
-                    }
-                }
-                return null;
+                var clas = _context.class1.FirstOrDefault(x => x.ClassName == name);
+                return clas;
             }
             catch (Exception)
             {
@@ -80,14 +74,8 @@ namespace nms_backend_api.Logics.Concrete
         {
             try
             {
-                foreach (var k in classs)
-                {
-                    if (k.Teacher.FName == name)
-                    {
-                        return k;
-                    }
-                }
-                return null;
+                var cls=_context.class1.FirstOrDefault(x=>x.ClassName == name);
+                return cls;
             }
             catch (Exception)
             {
