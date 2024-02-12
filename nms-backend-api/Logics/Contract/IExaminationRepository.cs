@@ -20,7 +20,7 @@ namespace nms_backend_api.Logics.Contract
         void DeleteResult(string markId);
 
         Mark GetMarkByMarkId(string markId);
-        public StudentReportModel ReportStudent(string id);
+        //public StudentReportModel ReportStudent(string id);
 
     }
 }

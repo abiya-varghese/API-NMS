@@ -190,37 +190,37 @@ namespace nms_backend_api.Logics.Concrete
             }
         }
 
-        public StudentReportModel ReportStudent(string id)
-        {
-            try
-            {
+        //public StudentReportModel ReportStudent(string id)
+        //{
+        //    try
+        //    {
 
 
 
-                var student = _context.mark.Where(a => a.StudentId == id).ToList();
-                var total = 0.0;
-                foreach(Mark s in student)
-                {
-                    total = total + s.Marks;
-                }
-                var totalNoofMarks = student.Count();
-                double Percentage = ((double)total / totalNoofMarks) * 100;
-                string studentid=_context.mark.Select(a => a.StudentId).ToString();
-                StudentReportModel att = new StudentReportModel();
+        //        var student = _context.students.Where(a => a.StudentId == id).ToList();
+        //        var total = 0.0;
+        //        foreach (Mark s in student)
+        //        {
+        //            total = total + s.Marks;
+        //        }
+        //        var totalNoofMarks = student.Count();
+        //        double Percentage = ((double)total / totalNoofMarks) * 100;
+        //        string studentName = _context.mark.Select(a => a.StudentId).ToString();
+        //        StudentReportModel att = new StudentReportModel();
 
-                //att.StudentName =student.
-                //att.TotalAbsentDays = totalAbsentDays.ToString();
-                //att.Percentage = attendancePercentage.ToString() + "%";
-                //att.TotalWorkingDays = TotalDays.ToString();
-                return att;
+        //        att.StudentName = student.
+        //        att.TotalAbsentDays = totalAbsentDays.ToString();
+        //        att.Percentage = attendancePercentage.ToString() + "%";
+        //        att.TotalWorkingDays = TotalDays.ToString();
+        //        return att;
 
 
-            }
-            catch (Exception)
-            {
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
-        }
+        //        throw;
+        //    }
+        //}
     }
 }
