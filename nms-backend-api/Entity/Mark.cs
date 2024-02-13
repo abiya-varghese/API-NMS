@@ -28,9 +28,9 @@ namespace nms_backend_api.Entity
         public string? SubjectName { get; set; }
 
         [ForeignKey("ExamId")]
-        public Examination? examination { get; set; }
+        public Examination examination { get; set; }
 
         [ForeignKey("StudentId")]
-        public Student? student { get; set; }
+        public Student student { get; set; }
     }
 }

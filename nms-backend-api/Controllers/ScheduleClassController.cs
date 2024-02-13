@@ -14,11 +14,12 @@ namespace nms_backend_api.Controllers
     {
         private readonly IMapper _mapper;
         public List<ScheduleClass> classs = new List<ScheduleClass>();
-
+        private readonly MyContext myContext;
 
         public ScheduleClassRepository scheduleClassRepository;
-        public ScheduleClassController(ScheduleClassRepository scheduleClassRepository, IMapper mapper)
+        public ScheduleClassController(ScheduleClassRepository scheduleClassRepository, IMapper mapper,MyContext mycontext)
         {
+            this.myContext = mycontext;
             this._mapper = mapper;
             this.scheduleClassRepository = scheduleClassRepository;
         }
@@ -44,6 +45,39 @@ namespace nms_backend_api.Controllers
 
                 List<ScheduleClass> item = scheduleClassRepository.GetClassByClassID(id);
                 List<ScheduleClassDTO> classDTOs = _mapper.Map<List<ScheduleClassDTO>>(item);
+
+                int i = 0;
+                foreach(var clad in classDTOs)
+                {
+                    clad.teachername = (from t in myContext.teachers
+                                        where t.TeacherId == clad.TeacherId
+                                        select t.FName+ " " + t.LName).Single()
+;                }
+                return Ok(classDTOs);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, ex.Message);
+
+            }
+        }
+        [HttpGet, Route("GetClassBySubject/{subject}")]
+        public IActionResult getClassBySubject(string subject)
+        {
+            try
+            {
+
+                List<ScheduleClass> item = scheduleClassRepository.GetClassBySubject(subject);
+                List<ScheduleClassDTO> classDTOs = _mapper.Map<List<ScheduleClassDTO>>(item);
+
+                int i = 0;
+                foreach (var clad in classDTOs)
+                {
+                    clad.teachername = (from t in myContext.teachers
+                                        where t.TeacherId == clad.TeacherId
+                                        select t.FName + " " + t.LName).Single()
+;
+                }
                 return Ok(classDTOs);
             }
             catch (Exception ex)

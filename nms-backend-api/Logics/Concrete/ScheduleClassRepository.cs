@@ -55,6 +55,20 @@ namespace nms_backend_api.Logics.Concrete
                 throw;
             }
         }
+        public List<ScheduleClass> GetClassBySubject(string subject)
+        {
+            try
+            {
+                var scheclassBysub = _context.Schclass.Where(
+                      x => x.Subject.Equals(subject)).ToList();
+                return scheclassBysub;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public List<ScheduleClass> GetClassByTeacherID(string teacherId)
         {

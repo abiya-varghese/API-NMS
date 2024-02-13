@@ -70,7 +70,7 @@ namespace nms_backend_api.Logics.Concrete
                 StudentDto studentDto = mapper.Map<StudentDto>(stud);
                 studentDto.ClassName = (from c in _context.class1
                                where c.ClassId == stud.ClassId
-                               select c.ClassName).Single();
+                               select c.ClassName).FirstOrDefault();
                 return studentDto;
             }
             catch (Exception)
