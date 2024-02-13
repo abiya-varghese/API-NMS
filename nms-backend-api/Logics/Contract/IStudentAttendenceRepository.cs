@@ -1,4 +1,5 @@
-﻿using nms_backend_api.Entity;
+﻿using nms_backend_api.DTO;
+using nms_backend_api.Entity;
 using nms_backend_api.Models;
 
 namespace nms_backend_api.Logics.Contract
@@ -6,7 +7,7 @@ namespace nms_backend_api.Logics.Contract
     public interface IStudentAttendenceRepository
     {
 
-        public List<StudentAttendence> AddStudAttendence(DateTime today, string classId, string section);
+       // public List<StudentAttendence> AddStudAttendence(DateTime today, string classId, string section);
 
         List<StudentAttendence> GetAllStudAttendances();
 
@@ -19,6 +20,7 @@ namespace nms_backend_api.Logics.Contract
         void Delete(string id);
         public AttendenceModel AttendenceReportStudent(string id, DateTime month);
         public List<StudentAttendence> GetStudAttendenceByClassAndSection(DateTime today, string classId, string section);
+        void AddStudentAttendence(StudAttendanceDTO data);
 
     }
 }

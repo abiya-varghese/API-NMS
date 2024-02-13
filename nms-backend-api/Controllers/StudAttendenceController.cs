@@ -24,68 +24,43 @@ namespace nms_backend_api.Controllers
         }
 
         //addattendence
-        [HttpPost]
-        [Route("AddAttendence/{today}/{classId}/{section}")]
-        public IActionResult AddStudAttendence(DateTime today, string classId, string section)
+        //[HttpPost]
+        //[Route("AddAttendence/{today}/{classId}/{section}")]
+        //public IActionResult AddStudAttendence(DateTime today, string classId, string section)
+        //{
+        //    try
+        //    {
+        //        //  classRepository.Create(classes);
+        //        //  return Ok(classes);
+        //        //var _class = _mapper.Map<StudentAttendence>(data); //convert dto to entity
+
+
+        //        //if (ModelState.IsValid)
+        //        //{
+        //        //    _studentAttendenceRepository.AddStudAttendence(_class);
+
+        //        //    return Ok(_class);
+        //        //}
+
+        //        //return new JsonResult("Something went wrong") { StatusCode = 500 };
+        //        List<StudentAttendence> student = _studentAttendenceRepository.AddStudAttendence(today, classId, section);
+        //        List<StudAttendanceDTO> studentDTOs = _mapper.Map<List<StudAttendanceDTO>>(student);
+        //        return Ok(studentDTOs);
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        return StatusCode(404, ex.Message);
+
+        //    }
+        //}
+        [HttpPost, Route("AddStudentAttendence")]
+        public IActionResult AddStudentAttendence(StudAttendanceDTO data)
         {
             try
             {
-                //  classRepository.Create(classes);
-                //  return Ok(classes);
-                //var _class = _mapper.Map<StudentAttendence>(data); //convert dto to entity
-
-
-                //if (ModelState.IsValid)
-                //{
-                //    _studentAttendenceRepository.AddStudAttendence(_class);
-
-                //    return Ok(_class);
-                //}
-
-                //return new JsonResult("Something went wrong") { StatusCode = 500 };
-                List<StudentAttendence> student = _studentAttendenceRepository.AddStudAttendence(today, classId, section);
-                List<StudAttendanceDTO> studentDTOs = _mapper.Map<List<StudAttendanceDTO>>(student);
-                return Ok(studentDTOs);
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(404, ex.Message);
-
-            }
-        }
-        //GetAllStudAttendances
-        [HttpGet]
-        [Route("GetAllAttendences")]
-        public IActionResult GetAllStudAttendances()
-        {
-            try
-            {
-                List<StudentAttendence> student = _studentAttendenceRepository.GetAllStudAttendances();
-                List<StudAttendanceDTO> studentDTOs = _mapper.Map<List<StudAttendanceDTO>>(student);
-                return Ok(studentDTOs);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(404, ex.Message);
-            }
-        }
-
-        //GetStudAttendenceById
-        [HttpGet]
-        [Route("GetStudAttendenceByAttendenceId/{attid}")]
-
-        public IActionResult GetStudAttendenceById(string attid)
-        {
-            try
-            {
-                var item = _studentAttendenceRepository.GetStudAttendenceById(attid);
-
-
-                if (item == null)
-                    return NotFound();
-
-                return Ok(item);
+                _studentAttendenceRepository.AddStudentAttendence(data);
+                return Ok("Student Attendence added Succesfully");
             }
             catch (Exception)
             {
@@ -93,73 +68,140 @@ namespace nms_backend_api.Controllers
                 throw;
             }
         }
-
-        //getattendenceby date
-
-        [HttpGet]
-        [Route("GetattendenceBydate")]
-
-        public IActionResult GetStudentAttendencebyDate(DateTime date)
+        //GetAllStudAttendances
+        //}
+        [HttpGet, Route("GetAllAttendence")]
+        public IActionResult GetAllStudentAttendances()
         {
             try
             {
-
-                List<StudentAttendence> item = _studentAttendenceRepository.GetStudentAttendencebyDate(date);
-
-
-                List<StudAttendanceDTO> studDTOs = _mapper.Map<List<StudAttendanceDTO>>(item);
-                return Ok(studDTOs);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(404, ex.Message);
-
-            }
-        }
-
-        //edit 
-        [HttpPut]
-        [Route("Edit")]
-        public IActionResult Update(StudAttendanceDTO data)
-        {
-            try
-            {
-
-                //classRepository.Update(class1);
-                //return Ok(class1);
-                var _class = _mapper.Map<StudentAttendence>(data); //convert dto to entity
-
-
-                if (ModelState.IsValid)
-                {
-                    _studentAttendenceRepository.Update(_class);
-
-                    return Ok(_class);
-                }
-
-                return new JsonResult("Something went wrong") { StatusCode = 500 };
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(404, ex.Message);
-
-            }
-        }
-
-        //delete 
-        [HttpDelete]
-        [Route("Delete/{id}")]
-        public IActionResult Delete(string id)
-        {
-            try
-            {
-                _studentAttendenceRepository.Delete(id);
-                return Ok("Attendence deleted Succesfully");
+                return Ok(_studentAttendenceRepository.GetAllStudAttendances());
             }
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+        //[HttpGet]
+        //[Route("GetAllAttendences")]
+        //public IActionResult GetAllStudAttendances()
+        //{
+        //    try
+        //    {
+        //        List<StudentAttendence> student = _studentAttendenceRepository.GetAllStudAttendances();
+        //        List<StudAttendanceDTO> studentDTOs = _mapper.Map<List<StudAttendanceDTO>>(student);
+        //        return Ok(studentDTOs);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(404, ex.Message);
+        //    }
+        //}
+
+        //GetStudAttendenceById
+        //[HttpGet]
+        //[Route("GetStudAttendenceByAttendenceId/{attid}")]
+
+        //public IActionResult GetStudAttendenceById(string attid)
+        //{
+        //    try
+        //    {
+        //        var item = _studentAttendenceRepository.GetStudAttendenceById(attid);
+
+
+        //        if (item == null)
+        //            return NotFound();
+
+        //        return Ok(item);
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
+
+        //getattendenceby date
+
+        //[HttpGet]
+        //[Route("GetattendenceBydate")]
+
+        //public IActionResult GetStudentAttendencebyDate(DateTime date)
+        //{
+        //    try
+        //    {
+
+        //        List<StudentAttendence> item = _studentAttendenceRepository.GetStudentAttendencebyDate(date);
+
+
+        //        List<StudAttendanceDTO> studDTOs = _mapper.Map<List<StudAttendanceDTO>>(item);
+        //        return Ok(studDTOs);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(404, ex.Message);
+
+        //    }
+        //}
+
+        //edit 
+        //[HttpPut]
+        //[Route("Edit")]
+        //public IActionResult Update(StudAttendanceDTO data)
+        //{
+        //    try
+        //    {
+
+        //        //classRepository.Update(class1);
+        //        //return Ok(class1);
+        //        var _class = _mapper.Map<StudentAttendence>(data); //convert dto to entity
+
+
+        //        if (ModelState.IsValid)
+        //        {
+        //            _studentAttendenceRepository.Update(_class);
+
+        //            return Ok(_class);
+        //        }
+
+        //        return new JsonResult("Something went wrong") { StatusCode = 500 };
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        return StatusCode(404, ex.Message);
+
+        //    }
+        //}
+
+        ////delete 
+        //[HttpDelete]
+        //[Route("Delete/{id}")]
+        //public IActionResult Delete(string id)
+        //{
+        //    try
+        //    {
+        //        _studentAttendenceRepository.Delete(id);
+        //        return Ok("Attendence deleted Succesfully");
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
+        [HttpGet]
+        [Route("AttendenceReport/{date}/{id}")]
+        public IActionResult AttendenceReport(string id, DateTime date)
+        {
+            try
+            {
+                return Ok(_studentAttendenceRepository.AttendenceReportStudent(id, date));
+
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace nms_backend_api.Migrations
 {
     /// <inheritdoc />
-    public partial class mi : Migration
+    public partial class m897 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -120,8 +120,7 @@ namespace nms_backend_api.Migrations
                         name: "FK_tbl_schedule_tbl_class_ClassId",
                         column: x => x.ClassId,
                         principalTable: "tbl_class",
-                        principalColumn: "ClassId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ClassId");
                     table.ForeignKey(
                         name: "FK_tbl_schedule_tble_teacher_TeacherId",
                         column: x => x.TeacherId,
@@ -150,7 +149,8 @@ namespace nms_backend_api.Migrations
                         name: "FK_tbl_student_tbl_class_ClassId",
                         column: x => x.ClassId,
                         principalTable: "tbl_class",
-                        principalColumn: "ClassId");
+                        principalColumn: "ClassId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -170,8 +170,7 @@ namespace nms_backend_api.Migrations
                         name: "FK_tbl_mark_tbl_Examination_ExamId",
                         column: x => x.ExamId,
                         principalTable: "tbl_Examination",
-                        principalColumn: "ExamId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ExamId");
                     table.ForeignKey(
                         name: "FK_tbl_mark_tbl_student_StudentId",
                         column: x => x.StudentId,
@@ -183,10 +182,11 @@ namespace nms_backend_api.Migrations
                 name: "tbl_StudentAttendence",
                 columns: table => new
                 {
-                    StudAttendenceId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StudAttendenceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     AttendanceDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    status = table.Column<bool>(type: "bit", nullable: false)
+                    status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

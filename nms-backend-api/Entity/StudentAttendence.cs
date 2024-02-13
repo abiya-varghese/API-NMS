@@ -8,7 +8,9 @@ namespace nms_backend_api.Entity
     public class StudentAttendence
     {
         [Key]
-        public string StudAttendenceId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
+        public int StudAttendenceId { get; set; }
         public string StudentId { get; set; }
         [ForeignKey("StudentId")]
 
@@ -18,6 +20,6 @@ namespace nms_backend_api.Entity
         public DateTime AttendanceDate { get; set; }
 
         [Required]
-        public bool status { get; set; }
+        public string status { get; set; }
     }
 }

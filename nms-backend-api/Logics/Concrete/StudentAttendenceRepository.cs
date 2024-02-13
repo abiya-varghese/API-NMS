@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using nms_backend_api.DTO;
 using nms_backend_api.Entity;
 using nms_backend_api.Logics.Contract;
 using nms_backend_api.Models;
@@ -10,28 +12,32 @@ namespace nms_backend_api.Logics.Concrete
     {
 
         private readonly MyContext _context;
+        private readonly IMapper _mapper;
 
-        public StudentAttendenceRepository(MyContext context)
+        public StudentAttendenceRepository(MyContext context,IMapper mapper)
         {
             _context = context;
+            _mapper=mapper;
         }
 
         //addattendence
-        //public void AddStudAttendence(StudentAttendence studattendance)
-        //{
-        //    try
-        //    {
-        //        _context.StudAttendences.Add(studattendance);
-        //        _context.SaveChanges();
-        //    }
-        //    catch (Exception)
-        //    {
+        public void AddStudentAttendence(StudAttendanceDTO data)
+        {
+            try
+            {
+                var item = _mapper.Map<StudentAttendence>(data);
+                item.AttendanceDate = DateTime.Now;
+                _context.StudAttendences.Add(item);
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
 
-        //        throw;
-        //    }
-        //}
+                throw;
+            }
+        }
 
-        
+
 
         //get all attendences
         public List<StudentAttendence> GetAllStudAttendances()
@@ -119,8 +125,8 @@ namespace nms_backend_api.Logics.Concrete
 
                 var attendances = _context.StudAttendences.Where(a => a.StudentId == id && a.AttendanceDate.Date.Month == month.Month).ToList();
                 float TotalDays = attendances.Count();
-                float totalPresentDays = attendances.Count(a => a.status);
-                int totalAbsentDays = attendances.Count(a => !a.status);
+                float totalPresentDays = attendances.Count(a => a.status=="P");
+                int totalAbsentDays = attendances.Count(a => a.status == "A");
                 double attendancePercentage = ((double)totalPresentDays / TotalDays) * 100;
 
                 AttendenceModel att = new AttendenceModel();
@@ -140,48 +146,48 @@ namespace nms_backend_api.Logics.Concrete
             }
 
         }
-        public List<StudentAttendence> AddStudAttendence(DateTime today, string classId, string section)
-        {
-            try
-            {
+        //public List<StudentAttendence> AddStudAttendence(DateTime today, string classId, string section)
+        //{
+        //    try
+        //    {
 
 
-                List<StudentAttendence> ST = (_context.StudAttendences.Where(s => today == s.AttendanceDate && s.Student.Class.ClassId == classId && s.Student.Class.Section == section).ToList());
+        //        List<StudentAttendence> ST = (_context.StudAttendences.Where(s => today == s.AttendanceDate && s.Student.Class.ClassId == classId && s.Student.Class.Section == section).ToList());
 
-                StudentAttendence sts = new StudentAttendence { AttendanceDate = today, StudAttendenceId = "STEST", StudentId = "S", status = false };
+        //        StudentAttendence sts = new StudentAttendence { AttendanceDate = today, StudAttendenceId = "STEST", StudentId = "S", status = false };
 
-                List<Student> s = _context.students.Where(s => s.Class.ClassId == classId && s.Class.Section == section).ToList();
+        //        List<Student> s = _context.students.Where(s => s.Class.ClassId == classId && s.Class.Section == section).ToList();
 
-                if (ST.Count() == 0)
-                {
-                    foreach (Student ss in s)
-                    {
-                        Random rnd = new Random();
-                        sts.StudentId = ss.StudentId;
-                        sts.AttendanceDate = today;
-                        sts.StudAttendenceId = Guid.NewGuid().ToString();
-                        sts.status = false;
-                        _context.StudAttendences.Add(sts);
-                        _context.SaveChanges();
-                    }
-                    //_context.StudAttendences.Add(sts);
-                    //_context.SaveChanges();
+        //        if (ST.Count() == 0)
+        //        {
+        //            foreach (Student ss in s)
+        //            {
+        //                Random rnd = new Random();
+        //                sts.StudentId = ss.StudentId;
+        //                sts.AttendanceDate = today;
+        //                sts.StudAttendenceId = Guid.NewGuid().ToString();
+        //                sts.status = false;
+        //                _context.StudAttendences.Add(sts);
+        //                _context.SaveChanges();
+        //            }
+        //            //_context.StudAttendences.Add(sts);
+        //            //_context.SaveChanges();
 
-                    return _context.StudAttendences.ToList();
-
-
-                }
-
-                return _context.StudAttendences.ToList();
+        //            return _context.StudAttendences.ToList();
 
 
-            }
-            catch (Exception ex)
-            {
+        //        }
 
-                throw ex;
-            }
-        }
+        //        return _context.StudAttendences.ToList();
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw ex;
+        //    }
+        //}
         public List<StudentAttendence> GetStudAttendenceByClassAndSection(DateTime today, string classId, string section)
         {
             try

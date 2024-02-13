@@ -199,8 +199,11 @@ namespace nms_backend_api.Migrations
 
             modelBuilder.Entity("nms_backend_api.Entity.StudentAttendence", b =>
                 {
-                    b.Property<string>("StudAttendenceId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("StudAttendenceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudAttendenceId"));
 
                     b.Property<DateTime>("AttendanceDate")
                         .HasColumnType("datetime2");
@@ -209,8 +212,9 @@ namespace nms_backend_api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<bool>("status")
-                        .HasColumnType("bit");
+                    b.Property<string>("status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StudAttendenceId");
 

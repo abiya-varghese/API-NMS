@@ -6,13 +6,11 @@ namespace nms_backend_api.DTO
 {
     public class StudAttendanceDTO
     {
-        public string StudAttendenceId { get; set; }
         public string StudentId { get; set; }
 
 
-        public DateTime AttendanceDate { get; set; }
 
-        public bool status { get; set; }
+        public string status { get; set; }
 
     }
 }
