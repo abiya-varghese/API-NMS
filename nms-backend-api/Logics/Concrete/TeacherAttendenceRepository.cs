@@ -111,10 +111,13 @@ namespace nms_backend_api.Logics.Concrete
 
             try
             {
-                var attendances = _context.TeachAttendences.Where(a => a.TeacherId == id && a.AttendanceDate.Date.Month == month.Month).ToList();
-                float TotalDays = attendances.Count();
-                float totalPresentDays = attendances.Count(a => a.status == "P");
-                int totalAbsentDays = attendances.Count(a => a.status == "A");
+
+                var getids = _context.TeachAttendences.Where(x => x.TeacherId == id);
+                List<TeacherAttendence> ta = _context.TeachAttendences.Where(t => t.TeacherId == id && t.AttendanceDate.Month == month.Month).ToList();
+                var dates = getids.ToList();
+                float TotalDays = ta.Count();
+                float totalPresentDays = ta.Count(a => a.status == "P");
+                int totalAbsentDays = ta.Count(a => a.status == "A");
                 double attendancePercentage = ((double)totalPresentDays / TotalDays) * 100;
 
                 AttendenceModel att = new AttendenceModel();
@@ -124,6 +127,7 @@ namespace nms_backend_api.Logics.Concrete
                 att.Percentage = attendancePercentage.ToString() + "%";
                 att.TotalWorkingDays = TotalDays.ToString();
                 return att;
+
 
 
             }

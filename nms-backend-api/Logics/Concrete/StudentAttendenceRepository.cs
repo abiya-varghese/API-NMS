@@ -4,6 +4,7 @@ using nms_backend_api.DTO;
 using nms_backend_api.Entity;
 using nms_backend_api.Logics.Contract;
 using nms_backend_api.Models;
+using Org.BouncyCastle.Pqc.Crypto.Lms;
 using static System.Reflection.Metadata.BlobBuilder;
 
 namespace nms_backend_api.Logics.Concrete
@@ -123,10 +124,12 @@ namespace nms_backend_api.Logics.Concrete
 
 
 
-                var attendances = _context.StudAttendences.Where(a => a.StudentId == id && a.AttendanceDate.Date.Month == month.Month).ToList();
-                float TotalDays = attendances.Count();
-                float totalPresentDays = attendances.Count(a => a.status=="P");
-                int totalAbsentDays = attendances.Count(a => a.status == "A");
+                var getids = _context.StudAttendences.Where(x => x.StudentId == id);
+                List<StudentAttendence> ta = _context.StudAttendences.Where(t => t.StudentId == id && t.AttendanceDate.Month == month.Month).ToList();
+                var dates = getids.ToList();
+                float TotalDays = ta.Count();
+                float totalPresentDays = ta.Count(a => a.status == "P");
+                int totalAbsentDays = ta.Count(a => a.status == "A");
                 double attendancePercentage = ((double)totalPresentDays / TotalDays) * 100;
 
                 AttendenceModel att = new AttendenceModel();
@@ -136,8 +139,7 @@ namespace nms_backend_api.Logics.Concrete
                 att.Percentage = attendancePercentage.ToString() + "%";
                 att.TotalWorkingDays = TotalDays.ToString();
                 return att;
-
-
+              
             }
             catch (Exception)
             {
