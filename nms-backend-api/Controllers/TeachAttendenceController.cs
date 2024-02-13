@@ -23,142 +23,144 @@ namespace nms_backend_api.Controllers
         }
 
         //addattendence
-        [HttpPost]
-        [Route("AddAttendence")]
+
+        [HttpPost, Route("AddTeachAttendence")]
         public IActionResult AddTeachAttendence(TeacherAttendenceDTO data)
         {
             try
             {
-                //  classRepository.Create(classes);
-                //  return Ok(classes);
-                var _class = _mapper.Map<TeacherAttendence>(data); //convert dto to entity
-
-
-                if (ModelState.IsValid)
-                {
-                    _teacherAttendenceRepository.AddTeachAttendence(_class);
-
-                    return Ok(_class);
-                }
-
-                return new JsonResult("Something went wrong") { StatusCode = 500 };
+                _teacherAttendenceRepository.AddTeacherAttendence(data);
+                return Ok("Teacher Attendence added Succesfully");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                return StatusCode(404, ex.Message);
-
+                throw;
             }
         }
 
+
         //GetAllTeachAttendences
-        [HttpGet]
-        [Route("GetAllTeachAttendences")]
-        public IActionResult GetAllTeachAttendences()
+        //[HttpGet]
+        //[Route("GetAllTeachAttendences")]
+        //public IActionResult GetAllTeachAttendences()
+        //{
+        //    try
+        //    {
+        //        List<TeacherAttendence> teacher = _teacherAttendenceRepository.GetAllTeachAttendences();
+        //        List<TeacherAttendenceDTO> teacherDTOs = _mapper.Map<List<TeacherAttendenceDTO>>(teacher);
+        //        return Ok(teacherDTOs);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(404, ex.Message);
+        //    }
+        //}
+        [HttpGet, Route("GetAllAttendance")]
+        public IActionResult GetAllTeacherAttendances()
         {
             try
             {
-                List<TeacherAttendence> teacher = _teacherAttendenceRepository.GetAllTeachAttendences();
-                List<TeacherAttendenceDTO> teacherDTOs = _mapper.Map<List<TeacherAttendenceDTO>>(teacher);
-                return Ok(teacherDTOs);
+                return Ok(_teacherAttendenceRepository.GetAllTeachAttendences());
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(404, ex.Message);
+
+                throw;
             }
         }
 
         //GetTeachAttendenceById
-        [HttpGet]
-        [Route("GetTeachAttendenceById/{id}")]
+        //[HttpGet]
+        //[Route("GetTeachAttendenceById/{id}")]
 
-        public IActionResult GetTeachAttendenceById(string id)
-        {
-            try
-            {
-                var item = _teacherAttendenceRepository.GetTeachAttendenceById(id);
+        //public IActionResult GetTeachAttendenceById(string id)
+        //{
+        //    try
+        //    {
+        //        var item = _teacherAttendenceRepository.GetTeachAttendenceById(id);
 
 
-                if (item == null)
-                    return NotFound();
+        //        if (item == null)
+        //            return NotFound();
 
-                return Ok(item);
-            }
-            catch (Exception)
-            {
+        //        return Ok(item);
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
-        }
+        //        throw;
+        //    }
+        //}
         //getattendenceby date
 
-        [HttpGet]
-        [Route("GetattendenceBydate")]
+        //[HttpGet]
+        //[Route("GetattendenceBydate")]
 
-        public IActionResult GetTeachersAttendencebyDate(DateTime date)
-        {
-            try
-            {
+        //public IActionResult GetTeachersAttendencebyDate(DateTime date)
+        //{
+        //    try
+        //    {
 
-                List<TeacherAttendence> item = _teacherAttendenceRepository.GetTeachersAttendencebyDate(date);
+        //        List<TeacherAttendence> item = _teacherAttendenceRepository.GetTeachersAttendencebyDate(date);
 
 
-                List<TeacherAttendenceDTO> teacherDTOs = _mapper.Map<List<TeacherAttendenceDTO>>(item);
-                return Ok(teacherDTOs);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(404, ex.Message);
+        //        List<TeacherAttendenceDTO> teacherDTOs = _mapper.Map<List<TeacherAttendenceDTO>>(item);
+        //        return Ok(teacherDTOs);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(404, ex.Message);
 
-            }
-        }
+        //    }
+        //}
 
         //edit 
-        [HttpPut]
-        [Route("Edit")]
-        public IActionResult Update(TeacherAttendenceDTO data)
-        {
-            try
-            {
+        //[HttpPut]
+        //[Route("Edit")]
+        //public IActionResult Update(TeacherAttendenceDTO data)
+        //{
+        //    try
+        //    {
 
-                //classRepository.Update(class1);
-                //return Ok(class1);
-                var _class = _mapper.Map<TeacherAttendence>(data); //convert dto to entity
+        //        //classRepository.Update(class1);
+        //        //return Ok(class1);
+        //        var _class = _mapper.Map<TeacherAttendence>(data); //convert dto to entity
 
 
-                if (ModelState.IsValid)
-                {
-                    _teacherAttendenceRepository.Update(_class);
+        //        if (ModelState.IsValid)
+        //        {
+        //            _teacherAttendenceRepository.Update(_class);
 
-                    return Ok(_class);
-                }
+        //            return Ok(_class);
+        //        }
 
-                return new JsonResult("Something went wrong") { StatusCode = 500 };
-            }
-            catch (Exception ex)
-            {
+        //        return new JsonResult("Something went wrong") { StatusCode = 500 };
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                return StatusCode(404, ex.Message);
+        //        return StatusCode(404, ex.Message);
 
-            }
-        }
+        //    }
+        //}
 
         //delete 
-        [HttpDelete]
-        [Route("Delete/{id}")]
-        public IActionResult Delete(string id)
-        {
-            try
-            {
-                _teacherAttendenceRepository.Delete(id);
-                return Ok("Attendence deleted Succesfully");
-            }
-            catch (Exception)
-            {
+        //[HttpDelete]
+        //[Route("Delete/{id}")]
+        //public IActionResult Delete(string id)
+        //{
+        //    try
+        //    {
+        //        _teacherAttendenceRepository.Delete(id);
+        //        return Ok("Attendence deleted Succesfully");
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
-        }
+        //        throw;
+        //    }
+        //}
 
         [HttpGet]
         [Route("AttendenceReport/{date}/{id}")]
@@ -174,35 +176,35 @@ namespace nms_backend_api.Controllers
                 throw;
             }
         }
-        [HttpPost]
-        [Route("AddTRAttendenceAutogenerate/{date}")]
-        public IActionResult AddtrAttendence(DateTime today)
-        {
-            try
-            {
-                //  classRepository.Create(classes);
-                //  return Ok(classes);
-                //var _class = _mapper.Map<StudentAttendence>(data); //convert dto to entity
+        //[HttpPost]
+        //[Route("AddTRAttendenceAutogenerate/{date}")]
+        //public IActionResult AddtrAttendence(DateTime today)
+        //{
+        //    try
+        //    {
+        //        //  classRepository.Create(classes);
+        //        //  return Ok(classes);
+        //        //var _class = _mapper.Map<StudentAttendence>(data); //convert dto to entity
 
 
-                //if (ModelState.IsValid)
-                //{
-                //    _studentAttendenceRepository.AddStudAttendence(_class);
+        //        //if (ModelState.IsValid)
+        //        //{
+        //        //    _studentAttendenceRepository.AddStudAttendence(_class);
 
-                //    return Ok(_class);
-                //}
+        //        //    return Ok(_class);
+        //        //}
 
-                //return new JsonResult("Something went wrong") { StatusCode = 500 };
-                List<TeacherAttendence> teacher = _teacherAttendenceRepository.AddTeacherAttendenceAutogenerate(today);
-                List<TeacherAttendenceDTO> teacherDTOs = _mapper.Map<List<TeacherAttendenceDTO>>(teacher);
-                return Ok(teacherDTOs);
-            }
-            catch (Exception ex)
-            {
+        //        //return new JsonResult("Something went wrong") { StatusCode = 500 };
+        //        List<TeacherAttendence> teacher = _teacherAttendenceRepository.AddTeacherAttendenceAutogenerate(today);
+        //        List<TeacherAttendenceDTO> teacherDTOs = _mapper.Map<List<TeacherAttendenceDTO>>(teacher);
+        //        return Ok(teacherDTOs);
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                return StatusCode(404, ex.Message);
+        //        return StatusCode(404, ex.Message);
 
-            }
-        }
+        //    }
+        //}
     }
 }

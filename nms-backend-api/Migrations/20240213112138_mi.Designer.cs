@@ -12,8 +12,8 @@ using nms_backend_api.Entity;
 namespace nms_backend_api.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240212042523_migkeerthy")]
-    partial class migkeerthy
+    [Migration("20240213112138_mi")]
+    partial class mi
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -259,8 +259,11 @@ namespace nms_backend_api.Migrations
 
             modelBuilder.Entity("nms_backend_api.Entity.TeacherAttendence", b =>
                 {
-                    b.Property<string>("TeacherAttendId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("TeacherAttendId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeacherAttendId"));
 
                     b.Property<DateTime>("AttendanceDate")
                         .HasColumnType("datetime2");
@@ -270,8 +273,9 @@ namespace nms_backend_api.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("TeacherId");
 
-                    b.Property<bool>("status")
-                        .HasColumnType("bit");
+                    b.Property<string>("status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TeacherAttendId");
 

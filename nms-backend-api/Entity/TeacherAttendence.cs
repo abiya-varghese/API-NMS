@@ -6,10 +6,12 @@ namespace nms_backend_api.Entity
     public class TeacherAttendence
     {
         [Key]
-        public string TeacherAttendId { get; set; }
+        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int TeacherAttendId { get; set; }
         [Column("TeacherId")]
-        public string TeacherId { get;set; }
-        
+        public string TeacherId { get; set; }
+
 
         [ForeignKey("TeacherId")]
         public Teacher? Teacher { get; set; }
@@ -18,6 +20,6 @@ namespace nms_backend_api.Entity
         public DateTime AttendanceDate { get; set; }
 
         [Required]
-        public bool status { get; set; }
+        public string status { get; set; }
     }
 }
