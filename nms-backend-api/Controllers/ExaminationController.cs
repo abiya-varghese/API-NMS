@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using nms_backend_api.DTO;
 using nms_backend_api.Entity;
 using nms_backend_api.Logics;
 using nms_backend_api.Logics.Concrete;
 using nms_backend_api.Logics.Contract;
+using nms_backend_api.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace nms_backend_api.Controllers
@@ -18,11 +20,12 @@ namespace nms_backend_api.Controllers
         private readonly IMapper _mapper;
         public List<Examination> exam = new List<Examination>();
         public List<Mark> mark = new List<Mark>();
-
-        public ExaminationController(ExaminationRepository examinationrepository, IMapper mapper)
+        private readonly MyContext _context;
+        public ExaminationController(ExaminationRepository examinationrepository, IMapper mapper, MyContext context)
         {
             _examinationrepository = examinationrepository;
             _mapper = mapper;
+            _context = context;
         }
 
         [HttpPost, Route("ScheduleExam")]
@@ -277,6 +280,84 @@ namespace nms_backend_api.Controllers
             {
 
                 throw;
+            }
+        }
+        [HttpGet, Route("GetResultStudentby/{id}")]
+        public IActionResult GetByStudentId(string id)
+        {
+            try
+            {
+                List<Mark> r1 = _examinationrepository.GetAllResultByStudId(id);
+                List<ResultDisplay> resultDTO = _mapper.Map<List<ResultDisplay>>(r1);
+
+
+                int i = 0;
+                foreach (var item in resultDTO)
+                {
+                    item.ExamName = (from e in _context.examination
+                                     where e.ExamId == r1[i].ExamId
+                    select e.ExamName).Single();
+
+
+                    item.StudentName = (from e in _context.students
+                                        where e.StudentId == r1[i].StudentId
+                                        select e.FirstName + " " + e.LastName).Single();
+
+
+                    item.StudentRoll = (from e in _context.students
+                                        where e.StudentId == r1[i].StudentId
+                                        select e.Rollno).Single();
+
+
+                    item.className = (from e in _context.students
+                                      where e.StudentId == r1[i].StudentId
+                                      select e.Class.ClassName).Single();
+
+
+                    item.Section = (from e in _context.students
+                                    where e.StudentId == r1[i].StudentId
+                                    select e.Class.Section).Single();
+
+
+                    item.Subject = (from e in _context.mark
+                                    where e.SubjectName == r1[i].SubjectName
+                                    select e.SubjectName).Single();
+                    item.mark = (from e in _context.mark
+                                 where e.MarkId == r1[i].MarkId
+                                 select e.Marks).Single();
+                    item.Result = item.mark >= 40 ? "Pass" : "Fail";
+
+
+                }
+
+
+                ResultReport resultReport = new ResultReport();
+
+                // resultReport.stdResults = resultDTO;
+                resultReport.stdDisplay = resultDTO;
+                float totalmark = 0;
+
+
+                foreach (var item in resultDTO)
+                {
+                    totalmark += item.mark;
+                    //if (item.Mark >= 40)
+                    //{
+                    //    item.Result = "Pass";
+                    //}
+                    //else
+                    //{
+                    //    item
+                    //}
+                }
+                resultReport.totalMarks = totalmark.ToString();
+                resultReport.Percentage = ((totalmark / (float)resultDTO.Count())).ToString();
+                return Ok(resultReport);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, ex.Message);
+
             }
         }
     }
