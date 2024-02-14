@@ -319,15 +319,15 @@ namespace nms_backend_api.Controllers
                                     select e.Class.Section).Single();
 
 
-                    item.Subject = (from e in _context.mark
-                                    where e.SubjectName == r1[i].SubjectName
+                    item.Subject = (from e in _context.examination
+                                    where e.SubjectName == r1[i].SubjectName                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                                     select e.SubjectName).Single();
                     item.mark = (from e in _context.mark
                                  where e.MarkId == r1[i].MarkId
                                  select e.Marks).Single();
                     item.Result = item.mark >= 40 ? "Pass" : "Fail";
 
-
+                    i++;
                 }
 
 

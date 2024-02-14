@@ -8,6 +8,8 @@
         public string teachername { get; set; }
         public string Subject { get; set; }
         public string Sessiontime { get; set; }
+        //public string FName { get; set; }
+
 
     }
 }
