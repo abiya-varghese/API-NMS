@@ -12,8 +12,8 @@ using nms_backend_api.Entity;
 namespace nms_backend_api.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240213114051_m897")]
-    partial class m897
+    [Migration("20240214040656_mig32")]
+    partial class mig32
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -116,6 +116,30 @@ namespace nms_backend_api.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("tbl_mark");
+                });
+
+            modelBuilder.Entity("nms_backend_api.Entity.Notification", b =>
+                {
+                    b.Property<string>("notificationId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("Notification ID");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("Notification Time");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Message");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Role");
+
+                    b.HasKey("notificationId");
+
+                    b.ToTable("notification");
                 });
 
             modelBuilder.Entity("nms_backend_api.Entity.ScheduleClass", b =>

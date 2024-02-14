@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using nms_backend_api.Entity;
+using nms_backend_api.Logics.Concrete;
 
 namespace nms_backend_api.Controllers
 {

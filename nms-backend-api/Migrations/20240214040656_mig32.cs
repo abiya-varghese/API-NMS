@@ -6,11 +6,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace nms_backend_api.Migrations
 {
     /// <inheritdoc />
-    public partial class m897 : Migration
+    public partial class mig32 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "notification",
+                columns: table => new
+                {
+                    NotificationID = table.Column<string>(name: "Notification ID", type: "nvarchar(450)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NotificationTime = table.Column<DateTime>(name: "Notification Time", type: "datetime2", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_notification", x => x.NotificationID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "tbl_user",
                 columns: table => new
@@ -80,7 +94,8 @@ namespace nms_backend_api.Migrations
                         name: "FK_TeachAttendences_tble_teacher_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "tble_teacher",
-                        principalColumn: "TeacherId");
+                        principalColumn: "TeacherId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -100,7 +115,8 @@ namespace nms_backend_api.Migrations
                         name: "FK_tbl_Examination_tbl_class_ClassId",
                         column: x => x.ClassId,
                         principalTable: "tbl_class",
-                        principalColumn: "ClassId");
+                        principalColumn: "ClassId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -120,7 +136,8 @@ namespace nms_backend_api.Migrations
                         name: "FK_tbl_schedule_tbl_class_ClassId",
                         column: x => x.ClassId,
                         principalTable: "tbl_class",
-                        principalColumn: "ClassId");
+                        principalColumn: "ClassId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_tbl_schedule_tble_teacher_TeacherId",
                         column: x => x.TeacherId,
@@ -170,7 +187,8 @@ namespace nms_backend_api.Migrations
                         name: "FK_tbl_mark_tbl_Examination_ExamId",
                         column: x => x.ExamId,
                         principalTable: "tbl_Examination",
-                        principalColumn: "ExamId");
+                        principalColumn: "ExamId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_tbl_mark_tbl_student_StudentId",
                         column: x => x.StudentId,
@@ -195,7 +213,8 @@ namespace nms_backend_api.Migrations
                         name: "FK_tbl_StudentAttendence_tbl_student_StudentId",
                         column: x => x.StudentId,
                         principalTable: "tbl_student",
-                        principalColumn: "StudentId");
+                        principalColumn: "StudentId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -247,6 +266,9 @@ namespace nms_backend_api.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "notification");
+
             migrationBuilder.DropTable(
                 name: "tbl_mark");
 

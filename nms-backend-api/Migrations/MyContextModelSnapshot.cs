@@ -115,6 +115,30 @@ namespace nms_backend_api.Migrations
                     b.ToTable("tbl_mark");
                 });
 
+            modelBuilder.Entity("nms_backend_api.Entity.Notification", b =>
+                {
+                    b.Property<string>("notificationId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("Notification ID");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("Notification Time");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Message");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Role");
+
+                    b.HasKey("notificationId");
+
+                    b.ToTable("notification");
+                });
+
             modelBuilder.Entity("nms_backend_api.Entity.ScheduleClass", b =>
                 {
                     b.Property<string>("ScheduleId")

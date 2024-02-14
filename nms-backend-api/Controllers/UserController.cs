@@ -32,12 +32,12 @@ namespace nms_backend_api.Controllers
         {
             try
             {
-               // if(_userRepository.CheckRegister(user.Role, user.AdmissionId))
+                if(_userRepository.CheckRegister(user.Role, user.AdmissionId))
                 {
                     _userRepository.AddUser(user);
                     return Ok("User added Succesfully");
                 }
-               // else
+                else
                 {
                     return BadRequest($"No Id in {user.Role} Register");
                 }
