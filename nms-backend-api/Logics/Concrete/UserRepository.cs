@@ -116,11 +116,11 @@ namespace nms_backend_api.Logics.Concrete
         }
         public bool CheckRegister(string Role,string id)
         {
-            if (Role == "Student")
+            if (Role == "student")
             {
                return _context.students.Any(x=>x.StudentId == id);
             }
-            else if (Role =="Teacher")
+            else if (Role =="teacher")
             {
                return _context.teachers.Any(x=>x.TeacherId == id);
             }
