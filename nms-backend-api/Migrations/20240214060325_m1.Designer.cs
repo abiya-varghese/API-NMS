@@ -12,8 +12,8 @@ using nms_backend_api.Entity;
 namespace nms_backend_api.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240214040656_mig32")]
-    partial class mig32
+    [Migration("20240214060325_m1")]
+    partial class m1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -25,7 +25,7 @@ namespace nms_backend_api
             builder.Services.AddTransient<IUserRepository, UserRepository>();
             builder.Services.AddTransient<ExaminationRepository>();
             builder.Services.AddTransient<ScheduleClassRepository>();
-            builder.Services.AddTransient<AssignClass>();
+           
 
             builder.Services.AddControllers();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

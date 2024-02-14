@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace nms_backend_api.Migrations
 {
     /// <inheritdoc />
-    public partial class mig32 : Migration
+    public partial class m1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -73,8 +73,7 @@ namespace nms_backend_api.Migrations
                         name: "FK_tbl_class_tble_teacher_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "tble_teacher",
-                        principalColumn: "TeacherId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "TeacherId");
                 });
 
             migrationBuilder.CreateTable(
@@ -94,8 +93,7 @@ namespace nms_backend_api.Migrations
                         name: "FK_TeachAttendences_tble_teacher_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "tble_teacher",
-                        principalColumn: "TeacherId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "TeacherId");
                 });
 
             migrationBuilder.CreateTable(
@@ -115,8 +113,7 @@ namespace nms_backend_api.Migrations
                         name: "FK_tbl_Examination_tbl_class_ClassId",
                         column: x => x.ClassId,
                         principalTable: "tbl_class",
-                        principalColumn: "ClassId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ClassId");
                 });
 
             migrationBuilder.CreateTable(
@@ -187,8 +184,7 @@ namespace nms_backend_api.Migrations
                         name: "FK_tbl_mark_tbl_Examination_ExamId",
                         column: x => x.ExamId,
                         principalTable: "tbl_Examination",
-                        principalColumn: "ExamId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ExamId");
                     table.ForeignKey(
                         name: "FK_tbl_mark_tbl_student_StudentId",
                         column: x => x.StudentId,
@@ -213,8 +209,7 @@ namespace nms_backend_api.Migrations
                         name: "FK_tbl_StudentAttendence_tbl_student_StudentId",
                         column: x => x.StudentId,
                         principalTable: "tbl_student",
-                        principalColumn: "StudentId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "StudentId");
                 });
 
             migrationBuilder.CreateIndex(
