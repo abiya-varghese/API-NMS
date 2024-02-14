@@ -244,10 +244,10 @@ namespace nms_backend_api.Controllers
             {
                 return Ok(_studentRepository.GetStudentById(studid));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
 

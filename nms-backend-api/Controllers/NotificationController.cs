@@ -24,10 +24,10 @@ namespace nms_backend_api.Controllers
                 notificationRepository.Add(notification);
                 return Ok(notification);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(404, ex.Message);
             }
         }
         [HttpPut, Route("EditNotification/")]
@@ -38,10 +38,10 @@ namespace nms_backend_api.Controllers
                 notificationRepository.Update(notification);
                 return Ok(notification);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(404, ex.Message);
             }
         }
         [HttpGet, Route("GetNotification/")]
@@ -51,10 +51,10 @@ namespace nms_backend_api.Controllers
             {
                 return Ok(notificationRepository.GetAll());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(404, ex.Message);
             }
         }
         [HttpDelete, Route("DeleteNotification/")]
@@ -65,10 +65,10 @@ namespace nms_backend_api.Controllers
                 notificationRepository.Delete(id);
                 return Ok("Notification Deleted");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(404, ex.Message);
             }
         }
     }

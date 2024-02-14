@@ -29,10 +29,10 @@ namespace nms_backend_api.Controllers
                 return Ok(teachers);
                 // return Ok(teacherRepository.GetAll());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
         [HttpPost, Route("AddTeacher")]
@@ -43,10 +43,10 @@ namespace nms_backend_api.Controllers
                 teacherRepository.Add(teacher);
                 return Ok(teacher);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
         [HttpPut, Route("EditTeacher")]
@@ -57,10 +57,10 @@ namespace nms_backend_api.Controllers
                 teacherRepository.Update(teacher);
                 return Ok(teacher);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
 
@@ -72,10 +72,10 @@ namespace nms_backend_api.Controllers
                 teacherRepository.Delete(id);
                 return Ok("Teacher Deleted");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
         [HttpGet, Route("GetTeachersById/{id}")]
@@ -85,10 +85,10 @@ namespace nms_backend_api.Controllers
             {
                 return Ok(teacherRepository.GetTeacher(id));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
         //[HttpGet, Route("GetTeacherBySubject/{Subject}")]
@@ -116,16 +116,15 @@ namespace nms_backend_api.Controllers
                 List<Teacher> teachers = teacherRepository.GetTeachersByClass(class1);
                 List<TeacherClassDTO> teacherDTOs = _mapper.Map<List<TeacherClassDTO>>(teachers);
                 return Ok(teacherDTOs);
-               // return Ok(teacherRepository.GetTeachersByClass(class1));
+                // return Ok(teacherRepository.GetTeachersByClass(class1));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
+
         }
-
-
         //[HttpGet, Route("GetAllTeacherByClass/{Class}")]
         //public IActionResult GetAllByclass(string class1)
         //{
@@ -153,10 +152,10 @@ namespace nms_backend_api.Controllers
                 return Ok(teachers);
                // return Ok(teacherRepository.GetTeachersBySubject(subject));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
 

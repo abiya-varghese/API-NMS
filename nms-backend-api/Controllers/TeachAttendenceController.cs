@@ -32,30 +32,14 @@ namespace nms_backend_api.Controllers
                 _teacherAttendenceRepository.AddTeacherAttendence(data);
                 return Ok("Teacher Attendence added Succesfully");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
 
 
-        //GetAllTeachAttendences
-        //[HttpGet]
-        //[Route("GetAllTeachAttendences")]
-        //public IActionResult GetAllTeachAttendences()
-        //{
-        //    try
-        //    {
-        //        List<TeacherAttendence> teacher = _teacherAttendenceRepository.GetAllTeachAttendences();
-        //        List<TeacherAttendenceDTO> teacherDTOs = _mapper.Map<List<TeacherAttendenceDTO>>(teacher);
-        //        return Ok(teacherDTOs);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(404, ex.Message);
-        //    }
-        //}
         [HttpGet, Route("GetAllAttendance")]
         public IActionResult GetAllTeacherAttendances()
         {
@@ -63,104 +47,13 @@ namespace nms_backend_api.Controllers
             {
                 return Ok(_teacherAttendenceRepository.GetAllTeachAttendences());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
 
-        //GetTeachAttendenceById
-        //[HttpGet]
-        //[Route("GetTeachAttendenceById/{id}")]
-
-        //public IActionResult GetTeachAttendenceById(string id)
-        //{
-        //    try
-        //    {
-        //        var item = _teacherAttendenceRepository.GetTeachAttendenceById(id);
-
-
-        //        if (item == null)
-        //            return NotFound();
-
-        //        return Ok(item);
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
-        //getattendenceby date
-
-        //[HttpGet]
-        //[Route("GetattendenceBydate")]
-
-        //public IActionResult GetTeachersAttendencebyDate(DateTime date)
-        //{
-        //    try
-        //    {
-
-        //        List<TeacherAttendence> item = _teacherAttendenceRepository.GetTeachersAttendencebyDate(date);
-
-
-        //        List<TeacherAttendenceDTO> teacherDTOs = _mapper.Map<List<TeacherAttendenceDTO>>(item);
-        //        return Ok(teacherDTOs);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(404, ex.Message);
-
-        //    }
-        //}
-
-        //edit 
-        //[HttpPut]
-        //[Route("Edit")]
-        //public IActionResult Update(TeacherAttendenceDTO data)
-        //{
-        //    try
-        //    {
-
-        //        //classRepository.Update(class1);
-        //        //return Ok(class1);
-        //        var _class = _mapper.Map<TeacherAttendence>(data); //convert dto to entity
-
-
-        //        if (ModelState.IsValid)
-        //        {
-        //            _teacherAttendenceRepository.Update(_class);
-
-        //            return Ok(_class);
-        //        }
-
-        //        return new JsonResult("Something went wrong") { StatusCode = 500 };
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        return StatusCode(404, ex.Message);
-
-        //    }
-        //}
-
-        //delete 
-        //[HttpDelete]
-        //[Route("Delete/{id}")]
-        //public IActionResult Delete(string id)
-        //{
-        //    try
-        //    {
-        //        _teacherAttendenceRepository.Delete(id);
-        //        return Ok("Attendence deleted Succesfully");
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
+        
 
         [HttpGet]
         [Route("AttendenceReport/{date}/{id}")]
@@ -171,9 +64,9 @@ namespace nms_backend_api.Controllers
                 return Ok(_teacherAttendenceRepository.AttendenceReportTeacher(id, date));
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
         //[HttpPost]

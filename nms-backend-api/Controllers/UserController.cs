@@ -42,10 +42,10 @@ namespace nms_backend_api.Controllers
                     return BadRequest($"No Id in {user.Role} Register");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
 
@@ -59,9 +59,9 @@ namespace nms_backend_api.Controllers
             {
                 return Ok(_userRepository.GetAllUsers());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
 
@@ -75,10 +75,9 @@ namespace nms_backend_api.Controllers
             {
                 return Ok(_userRepository.GetById(id));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
         [HttpGet]
@@ -90,10 +89,10 @@ namespace nms_backend_api.Controllers
             {
                 return Ok(_userRepository.GetByMailAndPhone(mail,phone));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
 
@@ -107,10 +106,10 @@ namespace nms_backend_api.Controllers
                 _userRepository.UpdateUser(user);
                 return Ok("Updated Succesfully");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
 
@@ -132,10 +131,10 @@ namespace nms_backend_api.Controllers
 
                 return Ok("Updated Successfully");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
 
@@ -149,10 +148,10 @@ namespace nms_backend_api.Controllers
                 _userRepository.DeleteUser(id);
                 return Ok("User deleted Succesfully");
             }
-            catch (Exception)
+            catch (Exception ex )
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
         [HttpPost]
@@ -173,10 +172,10 @@ namespace nms_backend_api.Controllers
                 }
                 return StatusCode(200, authReponse);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
       

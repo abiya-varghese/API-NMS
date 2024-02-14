@@ -81,10 +81,10 @@ namespace nms_backend_api.Controllers
 
                 return Ok(examinationDTOs);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(404, ex.Message);
             }
         }
         [HttpGet, Route("GetExamByClassId/{ClassId}")]
@@ -189,10 +189,10 @@ namespace nms_backend_api.Controllers
                 List<MarkDTO> markDTOs = _mapper.Map<List<MarkDTO>>(item);
                 return Ok(markDTOs);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(404, ex.Message);
             }
         }
         [HttpGet, Route("GetAllResultByExamId/{examId}")]
@@ -259,10 +259,10 @@ namespace nms_backend_api.Controllers
 
                 return Ok(markDTOs);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(404, ex.Message);
             }
         }
         [HttpGet, Route("GetAllResultByStudIdAndExamId/{studId}/{ExamId}")]
@@ -276,10 +276,10 @@ namespace nms_backend_api.Controllers
                 List<MarkDTO> markDTOs = _mapper.Map<List<MarkDTO>>(item);
                 return Ok(markDTOs);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return StatusCode(404, ex.Message);
             }
         }
         [HttpGet, Route("GetResultStudentby/{id}")]

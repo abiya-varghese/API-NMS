@@ -24,18 +24,7 @@ namespace nms_backend_api.Controllers
             this._mapper = mapper;
         }
         [HttpGet, Route("GetAllClass")]
-        //public IActionResult getAll()
-        //{
-        //    try
-        //    {
-        //        return Ok(classRepository.GetAll());
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
+       
         public IActionResult getAll()
         {
             try
